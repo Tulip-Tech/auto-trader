@@ -1,17 +1,17 @@
-import FooterComponent from "./footer/footer";
-import HeaderComponent from "./header";
+import React from 'react';
+import HeaderComponent from '@/components/layout/header';
 
 type Props = {
-  children: React.ReactElement | React.ReactNode;
-  className: string;
+    children: React.ReactElement | React.ReactNode;
+    className: string;
 };
 const AppLayout = ({ children, className }: Props) => {
-  return (
-    <div className={className}>
-      <HeaderComponent />
-      <div className="max-w-[1550px] mx-auto p-2">{children}</div>
-    </div>
-  );
+    return (
+        <div className={`w-full h-full ${className}`}>
+            <HeaderComponent/>
+            <div className="px-32 mb-10">{children}</div>
+        </div>
+    );
 };
 
 export default AppLayout;

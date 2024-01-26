@@ -1,8 +1,8 @@
 import CarShowComponent from "@/components/car-show";
 import { getCars, NORTHAMPTON_DEALER, SYSTON_DEALER, TCars } from '@/services/cars';
 
-export default function Home({ data }: { data: { northampton: TCars, syston: TCars } }) {
-    return <CarShowComponent data={data.northampton}/>;
+export default function Home({ data }: { data: TCars }) {
+    return <CarShowComponent data={data}/>;
 }
 
 export const getServerSideProps = async (ctx: any) => {
@@ -11,10 +11,8 @@ export const getServerSideProps = async (ctx: any) => {
         .join("&");
     return {
         props: {
-            data: {
-                northampton: await getCars(queries, NORTHAMPTON_DEALER),
-                syston: await getCars(queries, SYSTON_DEALER),
-            }
+            title: 'B&F - ' + ctx.query.slug,
+            data: await getCars(queries, ctx.query.slug === 'syston' ? SYSTON_DEALER : NORTHAMPTON_DEALER),
         },
     };
 };

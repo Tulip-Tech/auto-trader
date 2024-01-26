@@ -1,9 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import RatingLabel from "./rating";
 import Link from "next/link";
-import DropdownField from "../drop-down";
+
 interface CardItem {
   advertType: string;
   id: string;

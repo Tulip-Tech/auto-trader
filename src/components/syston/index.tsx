@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
 import CarListCard from "../car-shelf/car-card/car-card";
 import { SystonCarddata } from "./dummy-data/data";
-import { northamptonCarddata } from "../northampton/dummy-data/data";
+
 import DropdownField from "../car-shelf/drop-down";
 import FilterForm from "../form";
 const SystonComponent = () => {
+  const sortOptions = [
+    { key: "Price (Lowest)", value: "price-asc" },
+    { key: "Price (Highest)", value: "price-desct" },
+    { key: "Age (Newest First)", value: "year-desc" },
+    { key: "Mileage", value: "mileage" },
+  ];
+
   useEffect(() => {
     const fetchData = async () => {
       const url =
@@ -32,12 +39,7 @@ const SystonComponent = () => {
       <div className="flex flex-col space-y-5">
         <DropdownField
           onChange={() => {}}
-          options={[
-            "Price (Lowest)",
-            "Price (Highest)",
-            "Age (Newest First)",
-            "Mileage",
-          ]}
+          options={sortOptions}
           fieldName="sort:"
         />
         <CarListCard Carddata={data} />

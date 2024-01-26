@@ -6,9 +6,13 @@ const CarShowComponent = ({ data }: { data: any }) => {
     return (
         <div className="flex flex-col mt-2">
             <FilterFormSort/>
-            <div className="flex gap-x-5 mt-2">
-                <FilterForm/>
-                <CarListCard results={data?.stockResponse?.results ?? []}/>
+            <div className="grid grid-cols-8 gap-x-5 mt-2">
+                <div className="col-span-2">
+                    <FilterForm/>
+                </div>
+                <div className="col-span-6">
+                    <CarListCard stockResponse={data?.stockResponse}/>
+                </div>
             </div>
         </div>
     );

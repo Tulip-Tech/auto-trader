@@ -9,7 +9,7 @@ const inter = Poppins({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <AppLayout className={inter.className}>
+    <AppLayout className={`${inter.className} text-black`}>
       <Component {...pageProps} />
     </AppLayout>
   );

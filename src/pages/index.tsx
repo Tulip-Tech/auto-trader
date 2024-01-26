@@ -1,9 +1,10 @@
 import NorthamtonComponent from "@/components/northampton";
 
 export default function Home({ data }: { data: any }) {
-  console.log(data, "data");
+  console.log(data, "here is your data");
   return <NorthamtonComponent />;
 }
+
 export const getServerSideProps = async (ctx) => {
   let data = [];
   const queries = Object.keys(ctx?.query)

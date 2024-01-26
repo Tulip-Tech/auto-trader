@@ -1,6 +1,5 @@
 import { useState } from "react";
 import CarListCard from "../car-shelf/car-card/car-card";
-
 import { northamptonCarddata } from "./dummy-data/data";
 import DropdownField from "../car-shelf/drop-down";
 

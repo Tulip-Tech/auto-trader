@@ -16,12 +16,18 @@ const NorthamtonComponent = () => {
     { key: "Age (Newest First)", value: "year-desc" },
     { key: "Mileage", value: "mileage" },
   ];
-  const handleSort = (event: FormEvent) => {
-    event.preventDefault();
-    const queryParams = new URLSearchParams();
-    if (sort) queryParams.append("sort", sort);
+  const handleSort = (event: string) => {
+    const queryParams = new URLSearchParams(
+      router.query as Record<string, string>
+    );
+    if (sort) {
+      queryParams.set("sort", event);
+    } else {
+      queryParams.delete("sort");
+    }
+
     router.push({
-      pathname: "",
+      pathname: router.pathname,
       query: queryParams.toString(),
     });
   };
@@ -31,8 +37,8 @@ const NorthamtonComponent = () => {
       <div className="flex flex-col space-y-5">
         <DropdownField
           onChange={(e) => {
-            setSort(e.target.value);
-            handleSort(e);
+            setSort(e.currentTarget.value);
+            handleSort(e.target.value);
           }}
           options={sortOptions}
           fieldName="sort:"

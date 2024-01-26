@@ -14,11 +14,18 @@ const SystonComponent = () => {
   ];
   const [sort, setSort] = useState("");
   const [data, setData] = useState(SystonCarddata);
-  const handleSort = (event: FormEvent) => {
-    event.preventDefault();
-    const queryParams = new URLSearchParams();
-    if (sort) queryParams.append("sort", sort);
+  const handleSort = (event: string) => {
+    const queryParams = new URLSearchParams(
+      router.query as Record<string, string>
+    );
+    if (sort) {
+      queryParams.set("sort", event);
+    } else {
+      queryParams.delete("sort");
+    }
+
     router.push({
+      pathname: router.pathname,
       query: queryParams.toString(),
     });
   };
@@ -50,7 +57,7 @@ const SystonComponent = () => {
         <DropdownField
           onChange={(e) => {
             setSort(e.target.value);
-            handleSort(e);
+            handleSort(e.target.value);
           }}
           options={sortOptions}
           fieldName="sort:"

@@ -45,15 +45,17 @@ const FilterForm = () => {
   ];
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    const queryParams = new URLSearchParams();
-    if (make) queryParams.append("make", make);
-    if (model) queryParams.append("model", model);
-    if (minPrice) queryParams.append("price-from", minPrice);
-    if (maxPrice) queryParams.append("price-to", maxPrice);
-    if (colour) queryParams.append("colour", colour);
+    const queryParams = new URLSearchParams(
+      router.query as Record<string, string>
+    );
+    if (make) queryParams.set("make", make);
+    if (model) queryParams.set("model", model);
+    if (minPrice) queryParams.set("price-from", minPrice);
+    if (maxPrice) queryParams.set("price-to", maxPrice);
+    if (colour) queryParams.set("colour", colour);
 
     router.push({
-      pathname: "",
+      pathname: router.pathname,
       query: queryParams.toString(),
     });
   };

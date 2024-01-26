@@ -4,11 +4,11 @@ import Link from "next/link";
 import { TCars } from '@/services/cars';
 import RatingLabel from '@/components/car-show/car-shelf/car-card/rating';
 
-interface Props {
+interface TCarListCard {
     stockResponse?: TCars['stockResponse'];
 }
 
-const CarListCard = ({ stockResponse }: Props) => {
+const CarListCard = ({ stockResponse }: TCarListCard) => {
     return (
         <div className="flex flex-col space-y-5">
             {stockResponse?.results?.map((item) => (

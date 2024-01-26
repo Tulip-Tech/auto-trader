@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import InputField from "./common-input";
 import DropdownField from "@/components/car-show/car-shelf/drop-down";
 import Link from 'next/link';
+import { TCars } from '@/services/cars';
 
 const makeOptionKeyValue: Array<{ key: string, value: string }> = [
     { key: "Any", value: "" },
@@ -46,7 +47,11 @@ const sortOptions = [
     { key: "Mileage", value: "mileage" },
 ];
 
-const FilterForm = () => {
+type TFilterForm = {
+    stockResponse: TCars['stockResponse']
+}
+
+const FilterForm = ({ stockResponse }: TFilterForm) => {
     const router = useRouter()
     const [make, setMake] = useState("");
     const [model, setModel] = useState("");
@@ -56,6 +61,8 @@ const FilterForm = () => {
 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
+
+        router.query['page'] = String(1)
 
         if (make) router.query['make'] = make
         else delete router.query['make']
@@ -81,7 +88,7 @@ const FilterForm = () => {
             onSubmit={handleSubmit}
         >
             <div className="flex flex-col space-y-1 text-center border-b p-5 bg-primary text-white">
-                <span className="font-semibold">70 Cars found</span>
+                <span className="font-semibold">{stockResponse?.totalResults} Cars found</span>
                 <Link className="text-sm hover:text-blue-200" href={{
                     pathname: router.pathname,
                     query: {
@@ -153,6 +160,7 @@ const FilterForm = () => {
 export const FilterFormSort = () => {
     const router = useRouter()
     const handleSort = (e: React.FormEvent<HTMLElement>) => {
+        router.query['page'] = String(1)
         // @ts-ignore
         const sort = e.currentTarget.value;
         if (sort) router.query['sort'] = sort

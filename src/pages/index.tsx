@@ -5,7 +5,7 @@ export default function Home({ data }: { data: any }) {
   return <NorthamtonComponent />;
 }
 
-export const getServerSideProps = async (ctx) => {
+export const getServerSideProps = async (ctx: any) => {
   let data = [];
   const queries = Object.keys(ctx?.query)
     .map((k) => `${k}=${ctx.query[k]}`)

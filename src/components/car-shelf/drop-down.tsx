@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, MouseEvent } from "react";
 interface DropdownOption {
   key: string;
   value?: string;
@@ -6,8 +6,8 @@ interface DropdownOption {
 interface DropdownFieldProps {
   fieldName?: string;
   options: DropdownOption[];
-  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
-
+  onChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
+  onClick?: (e: MouseEvent<HTMLSelectElement>) => void;
   labelAlign?: "top" | "left";
 }
 
@@ -15,6 +15,7 @@ const DropdownField: React.FC<DropdownFieldProps> = ({
   fieldName,
   options,
   onChange,
+  onClick,
   labelAlign,
 }) => {
   return (
@@ -22,6 +23,8 @@ const DropdownField: React.FC<DropdownFieldProps> = ({
       className={` ${
         labelAlign === "top" ? "grid  self-left" : " flex gap-2 self-end"
       }`}
+      onChange={onChange}
+      onClick={onClick}
     >
       <span className="font-semibold my-auto">{fieldName}</span>
       <select

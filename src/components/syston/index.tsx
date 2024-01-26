@@ -1,16 +1,27 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import CarListCard from "../car-shelf/car-card/car-card";
 import { SystonCarddata } from "./dummy-data/data";
 
 import DropdownField from "../car-shelf/drop-down";
 import FilterForm from "../form";
+import router from "next/router";
 const SystonComponent = () => {
   const sortOptions = [
     { key: "Price (Lowest)", value: "price-asc" },
-    { key: "Price (Highest)", value: "price-desct" },
+    { key: "Price (Highest)", value: "price-desc" },
     { key: "Age (Newest First)", value: "year-desc" },
     { key: "Mileage", value: "mileage" },
   ];
+  const [sort, setSort] = useState("");
+  const [data, setData] = useState(SystonCarddata);
+  const handleSort = (event: FormEvent) => {
+    event.preventDefault();
+    const queryParams = new URLSearchParams();
+    if (sort) queryParams.append("sort", sort);
+    router.push({
+      query: queryParams.toString(),
+    });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,16 +43,19 @@ const SystonComponent = () => {
     console.dir(fetchData());
   }, []);
 
-  const [data, setData] = useState(SystonCarddata);
   return (
     <div className="flex gap-5 space-y-5">
       <FilterForm />
       <div className="flex flex-col space-y-5">
         <DropdownField
-          onChange={() => {}}
+          onChange={(e) => {
+            setSort(e.target.value);
+            handleSort(e);
+          }}
           options={sortOptions}
           fieldName="sort:"
         />
+
         <CarListCard Carddata={data} />
       </div>
     </div>

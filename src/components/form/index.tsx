@@ -1,8 +1,7 @@
 import React, { FormEvent, useState } from "react";
 import { useRouter } from "next/router";
-import InputField from "./common-input";
-import DropdownField from "@/components/car-show/car-shelf/drop-down";
-import Link from 'next/link';
+import BnfInput from "./bnf-input";
+import BnfDropdown from "@/components/form/bnf-dropdown";
 import { TCars } from '@/services/cars';
 
 const makeOptionKeyValue: Array<{ key: string, value: string }> = [
@@ -81,7 +80,19 @@ const FilterForm = ({ stockResponse }: TFilterForm) => {
 
         router.push(router);
     };
-
+    const handleReset = () => {
+        setMake('')
+        setModel('')
+        setMinPrice('')
+        setMaxPrice('')
+        setColour('')
+        router.push({
+            pathname: router.pathname,
+            query: {
+                slug: router.query?.slug || undefined
+            }
+        })
+    }
     return (
         <form
             className="bg-white rounded-lg overflow-hidden flex flex-col gap-5 h-fit pb-5"
@@ -89,15 +100,10 @@ const FilterForm = ({ stockResponse }: TFilterForm) => {
         >
             <div className="flex flex-col space-y-1 text-center border-b p-5 bg-primary text-white">
                 <span className="font-semibold">{stockResponse?.totalResults} Cars found</span>
-                <Link className="text-sm hover:text-blue-200" href={{
-                    pathname: router.pathname,
-                    query: {
-                        slug: router.query?.slug || undefined
-                    }
-                }}>Reset search criteria</Link>
+                <button className="text-sm hover:text-blue-200" onClick={handleReset}>Reset search criteria</button>
             </div>
             <div className="flex flex-col gap-5 px-5">
-                <DropdownField
+                <BnfDropdown
                     labelAlign="top"
                     onChange={(e) => {
                         // @ts-ignore
@@ -107,7 +113,7 @@ const FilterForm = ({ stockResponse }: TFilterForm) => {
                     options={makeOptionKeyValue}
                     fieldName="Make:"
                 />
-                <DropdownField
+                <BnfDropdown
                     labelAlign="top"
                     onChange={(e) => {
                         // @ts-ignore
@@ -120,13 +126,15 @@ const FilterForm = ({ stockResponse }: TFilterForm) => {
 
                 <section>
                     <span>Price</span>
-                    <section className="grid grid-cols-2 gap-3">
-                        <InputField
+                    <section className="grid md:grid-cols-2 gap-3">
+                        <BnfInput
+                            defaultValue={maxPrice || router.query['price-from'] as string}
                             placeholder="Min (Any)"
                             onChange={(e) => setMinPrice(e.target.value)}
                             type="number"
                         />
-                        <InputField
+                        <BnfInput
+                            defaultValue={maxPrice || router.query['price-to'] as string}
                             placeholder="Max (Any)"
                             onChange={(e) => setMaxPrice(e.target.value)}
                             type="number"
@@ -134,7 +142,7 @@ const FilterForm = ({ stockResponse }: TFilterForm) => {
                     </section>
                 </section>
 
-                <DropdownField
+                <BnfDropdown
                     labelAlign="top"
                     onChange={(e) => {
                         // @ts-ignore
@@ -168,7 +176,7 @@ export const FilterFormSort = () => {
         router.push(router);
     };
 
-    return <DropdownField
+    return <BnfDropdown
         defaultValue={router.query['sort'] as string}
         onChange={handleSort}
         options={sortOptions}

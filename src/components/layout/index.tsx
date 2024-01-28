@@ -9,7 +9,7 @@ const AppLayout = ({ children, className }: Props) => {
     return (
         <div className={`w-full h-full ${className}`}>
             <HeaderComponent/>
-            <div className="px-32 mb-10">{children}</div>
+            <div className="xl:px-[350px] lg:px-[200px] md:px-[100px] px-[25px] mb-10">{children}</div>
         </div>
     );
 };

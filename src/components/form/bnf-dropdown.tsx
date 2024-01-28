@@ -13,16 +13,16 @@ interface DropdownFieldProps {
     labelAlign?: "top" | "left";
 }
 
-const DropdownField = ({
-                           fieldName,
-                           defaultValue,
-                           options,
-                           onChange,
-                           labelAlign,
-                       }: DropdownFieldProps) => {
+const BnfDropdown = ({
+                         fieldName,
+                         defaultValue,
+                         options,
+                         onChange,
+                         labelAlign,
+                     }: DropdownFieldProps) => {
     return (
         <section
-            className={` ${
+            className={`${
                 labelAlign === "top" ? "grid  self-left" : " flex gap-2 self-end"
             }`}
         >
@@ -31,14 +31,13 @@ const DropdownField = ({
                 className={` text-black/40 p-2 rounded ${
                     labelAlign === "top" ? "bg-slate-200" : " bg-white"
                 }`}
-                defaultValue={defaultValue}
                 onChange={e => {
                     e.preventDefault();
                     onChange(e)
                 }}
             >
                 {options.map((option, index) => (
-                    <option key={index} value={option.value}>
+                    <option key={index} value={option.value} selected={option.value === defaultValue}>
                         {option.key}
                     </option>
                 ))}
@@ -47,4 +46,4 @@ const DropdownField = ({
     );
 };
 
-export default DropdownField;
+export default BnfDropdown;

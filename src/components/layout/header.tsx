@@ -23,6 +23,7 @@ const HeaderComponent = () => {
                 <div className="flex justify-between lg:gap-10">
                     <Link href="/">
                         <Image
+                            priority
                             src="/header/B&F-03.svg"
                             alt="logo"
                             width={170}

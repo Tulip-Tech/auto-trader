@@ -18,7 +18,7 @@ const CarListCard = ({ stockResponse }: TCarListCard) => {
     React.useEffect(() => {
         setResults(stockResponse.results ?? [])
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [router.query?.slug])
+    }, [router.query])
 
     React.useEffect(() => {
         const nextObserver = new IntersectionObserver((entries) => {

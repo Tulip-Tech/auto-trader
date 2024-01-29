@@ -5,7 +5,7 @@ def deploy_old(servers, branch = '') {
         println "Deploying to ${item}."
         sh(script: """
             whoami
-            ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@${item} bash -c "'./cars.sh'"
+            ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ubuntu@${item} bash -c "'./cars.sh'"
         """)
     }
 }
@@ -26,12 +26,12 @@ pipeline {
         }
         stage('Deploy to develop') {
             when {
-                branch 'develop'
+                branch 'master'
             }
             steps {
                 script {
                     def servers = ['10.217.125.7']
-                    def branch = 'develop'
+                    def branch = 'master'
                     deploy_old(servers, branch)
                 }
             }

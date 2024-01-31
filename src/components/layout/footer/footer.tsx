@@ -1,7 +1,6 @@
 import { IoIosArrowUp } from "react-icons/io";
 import AutoTraderGroupComponent from "./auto-trader-group";
 import ProductServicesComponent from "./product-services";
-import MyFooterLinksComponent from "./footer-links-component";
 
 const FooterComponent = () => {
   const scrollToTop = () => {

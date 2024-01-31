@@ -11,8 +11,6 @@ const UsedVehicleComponent = () => {
 
         <div className="grid grid-cols-1 gap-8  sm:grid-cols-2 lg:grid-cols-4 ">
           <div>
-            
-
             <ul className="space-y-4 text-sm">
               <li>
                 <div className="flex gap-1 text-white items-center">
@@ -37,23 +35,25 @@ const UsedVehicleComponent = () => {
               <li>
                 <div className="flex gap-1 text-white items-center">
                   <FaAngleRight size={20} />
-                  <p className="font-medium text-white text-base">Used RENAULT</p>
+                  <p className="font-medium text-white text-base">
+                    Used RENAULT
+                  </p>
                 </div>
               </li>
 
               <li>
                 <div className="flex gap-1 text-white items-center">
                   <FaAngleRight size={20} />
-                  <p className="font-medium text-white text-base">Used VOLKSWAGEN</p>
+                  <p className="font-medium text-white text-base">
+                    Used VOLKSWAGEN
+                  </p>
                 </div>
               </li>
             </ul>
           </div>
 
           <div>
-           
             <ul className="mt-6 space-y-4 text-sm">
-
               <li>
                 <div className="flex gap-1 text-white items-center">
                   <FaAngleRight size={20} />
@@ -63,7 +63,9 @@ const UsedVehicleComponent = () => {
               <li>
                 <div className="flex gap-1 text-white items-center">
                   <FaAngleRight size={20} />
-                  <p className="font-medium text-white text-base">Used HYUNDAI</p>
+                  <p className="font-medium text-white text-base">
+                    Used HYUNDAI
+                  </p>
                 </div>
               </li>
 
@@ -84,7 +86,6 @@ const UsedVehicleComponent = () => {
           </div>
 
           <div>
-            
             <ul className="mt-6 space-y-4 text-sm">
               <li>
                 <div className="flex gap-1 text-white items-center">
@@ -95,28 +96,33 @@ const UsedVehicleComponent = () => {
               <li>
                 <div className="flex gap-1 text-white items-center">
                   <FaAngleRight size={20} />
-                  <p className="font-medium text-white text-base">Used JAGUAR</p>
+                  <p className="font-medium text-white text-base">
+                    Used JAGUAR
+                  </p>
                 </div>
               </li>
 
               <li>
                 <div className="flex gap-1 text-white items-center">
                   <FaAngleRight size={20} />
-                  <p className="font-medium text-white text-base">Used NISSAN</p>
+                  <p className="font-medium text-white text-base">
+                    Used NISSAN
+                  </p>
                 </div>
               </li>
 
               <li>
                 <div className="flex gap-1 text-white items-center">
                   <FaAngleRight size={20} />
-                  <p className="font-medium text-white text-base">Used TOYOTA</p>
+                  <p className="font-medium text-white text-base">
+                    Used TOYOTA
+                  </p>
                 </div>
               </li>
             </ul>
           </div>
 
           <div>
-           
             <ul className="mt-6 space-y-4 text-sm">
               <li>
                 <div className="flex gap-1 text-white items-center">
@@ -134,14 +140,18 @@ const UsedVehicleComponent = () => {
               <li>
                 <div className="flex gap-1 text-white items-center">
                   <FaAngleRight size={20} />
-                  <p className="font-medium text-white text-base">Used PEUGEOT</p>
+                  <p className="font-medium text-white text-base">
+                    Used PEUGEOT
+                  </p>
                 </div>
               </li>
 
               <li>
                 <div className="flex gap-1 text-white items-center">
                   <FaAngleRight size={20} />
-                  <p className="font-medium text-white text-base">Used VAUXHALL</p>
+                  <p className="font-medium text-white text-base">
+                    Used VAUXHALL
+                  </p>
                 </div>
               </li>
             </ul>

@@ -45,7 +45,7 @@ const CarListCard = ({ stockResponse }: TCarListCard) => {
             }
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [router, stockResponse.hasMoreResults, stockResponse?.currentPage]);
+    }, [router, stockResponse.hasMoreResults]);
 
     return (
         <div

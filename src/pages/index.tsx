@@ -1,5 +1,6 @@
 import CarShowComponent from "@/components/car-show";
 import { getCars, NORTHAMPTON_DEALER, SYSTON_DEALER, TCars } from '@/services/cars';
+import { parseNumber } from '@/services/parseNumber';
 
 export default function Home({ cars }: { cars: TCars['stockResponse'] }) {
     return <CarShowComponent cars={cars}/>;
@@ -18,8 +19,7 @@ export const getServerSideProps = async (ctx: any) => {
         totalPages: Math.max(northampton?.stockResponse?.totalPages, syston?.stockResponse?.totalPages),
         isPostcodeValid: northampton?.stockResponse?.isPostcodeValid || syston?.stockResponse?.isPostcodeValid,
 
-        // TODO:: need to apply sorting which is active, which can be found in sortOptions result
-        // grab the sort option and sort the final results
+        // merged sorting is in below
         results: northampton?.stockResponse?.results?.concat(syston?.stockResponse?.results),
 
         // TODO:: only picking the northampton, if this info needs in ui, please try to overcome what to do
@@ -48,6 +48,24 @@ export const getServerSideProps = async (ctx: any) => {
                 return acc;
             }, {} as TCars['stockResponse']['searchOptions']['options'])
         }
+    }
+
+    const activeSort = cars?.sortOptions?.find(f => f.isSelected || f.isPreselected);
+    if (activeSort) {
+        cars.results = cars.results?.sort((a, b) => {
+            if (activeSort?.value?.startsWith('price-') && activeSort?.value?.endsWith('-asc')) {
+                return parseNumber(a.price, ['en-us']) - parseNumber(b.price, ['en-us'])
+            } else if (activeSort?.value?.startsWith('price-') && activeSort?.value?.endsWith('-desc')) {
+                return parseNumber(b.price, ['en-us']) - parseNumber(a.price, ['en-us'])
+            } else if (activeSort?.value?.startsWith('year-') && activeSort?.value?.endsWith('-asc')) {
+                return +a.vehicle.yearText.slice(0, 4) - +b.vehicle.yearText.slice(0, 4)
+            } else if (activeSort?.value?.startsWith('year-') && activeSort?.value?.endsWith('-desc')) {
+                return +b.vehicle.yearText.slice(0, 4) - +a.vehicle.yearText.slice(0, 4)
+            } else if (activeSort?.value === 'mileage') {
+                return parseNumber(a.vehicle.mileage, ['en-us']) - parseNumber(b.vehicle.mileage, ['en-us'])
+            }
+            return 0
+        })
     }
     return {
         props: {

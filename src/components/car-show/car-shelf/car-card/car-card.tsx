@@ -21,11 +21,12 @@ const CarListCard = ({ stockResponse }: TCarListCard) => {
     }, [router.query])
 
     React.useEffect(() => {
+        // TODO:: need to fix this infinite scrolling in respect to dynamic pages with page query change
         const nextObserver = new IntersectionObserver((entries) => {
             const target = entries[0];
             if (target.isIntersecting && stockResponse.hasMoreResults) {
                 setTimeout(() => {
-                    router.query['page'] = String(stockResponse?.currentPage + 1)
+                    router.query['page'] = String(+((router.query?.['page'] as string) || 1) + 1)
                     router.push(router, undefined, {
                         scroll: false
                     }).then(() => {
@@ -44,7 +45,7 @@ const CarListCard = ({ stockResponse }: TCarListCard) => {
             }
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [router, nextRef, stockResponse.hasMoreResults, stockResponse?.currentPage]);
+    }, [router, stockResponse.hasMoreResults, stockResponse?.currentPage]);
 
     return (
         <div

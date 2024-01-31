@@ -15,7 +15,7 @@ export const getServerSideProps = async (ctx: any) => {
         hasMoreResults: northampton?.stockResponse?.hasMoreResults || syston?.stockResponse?.hasMoreResults,
         currentPage: northampton?.stockResponse?.currentPage,
         totalResults: +northampton?.stockResponse?.totalResults + +syston?.stockResponse?.totalResults,
-        totalPages: Math.max(northampton?.stockResponse.totalPages, syston.stockResponse?.totalPages),
+        totalPages: Math.max(northampton?.stockResponse?.totalPages, syston?.stockResponse?.totalPages),
         isPostcodeValid: northampton?.stockResponse?.isPostcodeValid || syston?.stockResponse?.isPostcodeValid,
 
         // TODO:: need to apply sorting which is active, which can be found in sortOptions result
@@ -23,12 +23,12 @@ export const getServerSideProps = async (ctx: any) => {
         results: northampton?.stockResponse?.results?.concat(syston?.stockResponse?.results),
 
         // TODO:: only picking the northampton, if this info needs in ui, please try to overcome what to do
-        csFinanceProductInfoText: northampton.stockResponse?.csFinanceProductInfoText,
-        csFinanceProductInfoPageLocation: northampton.stockResponse?.csFinanceProductInfoPageLocation,
-        hpFinanceProductInfoText: northampton.stockResponse?.hpFinanceProductInfoText,
-        hpFinanceProductInfoPageLocation: northampton.stockResponse?.hpFinanceProductInfoPageLocation,
-        pcpFinanceProductInfoText: northampton.stockResponse?.pcpFinanceProductInfoText,
-        pcpFinanceProductInfoPageLocation: northampton.stockResponse?.pcpFinanceProductInfoPageLocation,
+        csFinanceProductInfoText: northampton?.stockResponse?.csFinanceProductInfoText,
+        csFinanceProductInfoPageLocation: northampton?.stockResponse?.csFinanceProductInfoPageLocation,
+        hpFinanceProductInfoText: northampton?.stockResponse?.hpFinanceProductInfoText,
+        hpFinanceProductInfoPageLocation: northampton?.stockResponse?.hpFinanceProductInfoPageLocation,
+        pcpFinanceProductInfoText: northampton?.stockResponse?.pcpFinanceProductInfoText,
+        pcpFinanceProductInfoPageLocation: northampton?.stockResponse?.pcpFinanceProductInfoPageLocation,
 
         // TODO:: sort is global and no count is returned, so picking from one of them is fine
         sortOptions: northampton?.stockResponse?.sortOptions,

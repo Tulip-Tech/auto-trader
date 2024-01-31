@@ -9,8 +9,7 @@ export const getServerSideProps = async (ctx: any) => {
     const queries = Object.keys(ctx?.query)
         .map((k) => `${k}=${ctx.query[k]}`)
         .join("&");
-    const northampton = await getCars(queries, NORTHAMPTON_DEALER)
-    const syston = await getCars(queries, SYSTON_DEALER)
+    const [northampton, syston] = await Promise.all([getCars(queries, NORTHAMPTON_DEALER), getCars(queries, SYSTON_DEALER)])
 
     const cars: TCars['stockResponse'] = {
         hasMoreResults: northampton?.stockResponse?.hasMoreResults || syston?.stockResponse?.hasMoreResults,

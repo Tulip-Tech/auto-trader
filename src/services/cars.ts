@@ -128,5 +128,5 @@ export type TCars = {
 }
 
 export const getCars = async <T = TCars>(queries: string, dealer = NORTHAMPTON_DEALER) => ofetch<T>(
-    `https://autotrader.co.uk/json/dealers/stock?advanced=true&advertising-location=at_cars&advertising-location=at_profile_cars&dealer=${dealer}&${queries}`
-    , { parseResponse: JSON.parse }).catch(() => ({} as T))
+    `https://bnfcars.tulip-tech.com/api/cars?advanced=true&advertising-location=at_cars&advertising-location=at_profile_cars&dealer=${dealer}${queries ? `&${queries}` : ''}`
+).catch(() => ({} as T))

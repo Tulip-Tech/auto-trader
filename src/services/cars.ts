@@ -1,3 +1,5 @@
+import { ofetch } from "ofetch";
+
 export const NORTHAMPTON_DEALER = '10038946'
 export const SYSTON_DEALER = '10028885'
 
@@ -125,13 +127,6 @@ export type TCars = {
     }
 }
 
-export const getCars = async (queries: string, dealer = NORTHAMPTON_DEALER) => {
-    let data: TCars = {} as TCars;
-    const response = await fetch(
-        `https://autotrader.co.uk/json/dealers/stock?advanced=true&advertising-location=at_cars&advertising-location=at_profile_cars&dealer=${dealer}&${queries}`
-    );
-    if (response.ok) {
-        data = await response.json();
-    }
-    return data
-}
+export const getCars = async <T = TCars>(queries: string, dealer = NORTHAMPTON_DEALER) => ofetch<T>(
+    `https://autotrader.co.uk/json/dealers/stock?advanced=true&advertising-location=at_cars&advertising-location=at_profile_cars&dealer=${dealer}&${queries}`
+    , { parseResponse: JSON.parse }).catch(() => ({} as T))

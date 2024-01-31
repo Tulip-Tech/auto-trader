@@ -35,7 +35,7 @@ export const getServerSideProps = async (ctx: any) => {
 
         searchOptions: {
             resultCount: String(+northampton?.stockResponse?.searchOptions?.resultCount + +syston?.stockResponse?.searchOptions?.resultCount),
-            options: Object.keys(northampton?.stockResponse?.searchOptions?.options)?.reduce((acc, key) => {
+            options: Object.keys(northampton?.stockResponse?.searchOptions?.options || {})?.reduce((acc, key) => {
                 acc[key] = northampton?.stockResponse?.searchOptions?.options?.[key]?.map(op => {
                     if (syston?.stockResponse?.searchOptions?.options?.[key]) {
                         const systonFind = syston?.stockResponse?.searchOptions?.options?.[key]?.find(sf => sf.displayName === op.displayName);

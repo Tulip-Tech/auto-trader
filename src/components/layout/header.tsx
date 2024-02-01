@@ -2,8 +2,9 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from 'next/router';
+import { IoMdClose, IoMdMenu } from "react-icons/io";
 
-const menuItems = [
+const leftMenuItems = [
     {
         text: "Northampton",
         href: "/northampton",
@@ -13,38 +14,84 @@ const menuItems = [
         href: "/syston",
     },
 ];
+const rightMenuItems = [
+    {
+        text: "Part Exchange",
+        href: "/part-exchange",
+    },
+    {
+        text: "AA Cars Standards",
+        href: "/aa-cars-standards",
+    },
+    {
+        text: "Contact Us",
+        href: "/contact-us",
+    },
+];
 
 const HeaderComponent = () => {
     const { query } = useRouter()
+    const [open, setOpen] = React.useState(false);
 
     return (
-        <div className="border-b bg-white px-20">
-            <div className="flex justify-between">
-                <div className="flex justify-between lg:gap-10">
-                    <Link href="/">
-                        <Image
-                            priority
-                            src="/header/B&F-03.svg"
-                            alt="logo"
-                            width={170}
-                            height={100}
-                        />
-                    </Link>
-                    <ul className="flex gap-5 text-sm font-bold text-slate-700 mt-2 ml-5">
-                        {menuItems.map((item, index) => (
-                            <li key={index} role="menuitem" className="mt-5 ">
-                                <Link
-                                    href={item.href}
-                                    className={`hover:bg-primary hover:text-white p-2 transition-all duration-500 rounded-md hover:font-medium ${item.href === `/${query.slug}` ? 'bg-primary text-white' : ''}`}
-                                >
-                                    {item.text}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+      <div className="fixed top-0 left-0 z-[9999] w-full bg-white shadow-md">
+        <div className="flex px-6 md:px-20 items-center justify-between w-full py-8 md:py-1 h-14 xl:h-16">
+          <div className="flex items-center h-full">
+            <div className="flex items-center text-2xl font-bold text-gray-800 cursor-pointer select-none">
+              <Link href="/">
+                <Image
+                  priority
+                  src="/footer/B&F-03.png"
+                  alt="logo"
+                  width={170}
+                  height={100}
+                />
+              </Link>
             </div>
+            <ul className="hidden md:flex items-center ml-4">
+              {leftMenuItems.map((item, index) => (
+                <li
+                  key={index}
+                  className="ml-4 text-xl font-semibold hover:text-primary"
+                >
+                  <Link href={item.href}>{item.text}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="hidden md:flex items-center">
+            <ul className="flex items-center">
+              {rightMenuItems.map((item, index) => (
+                <li
+                  key={index}
+                  className="ml-4 text-base font-medium hover:text-primary"
+                >
+                  <Link href={item.href}>{item.text}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="flex items-center justify-end md:hidden">
+            <div
+              onClick={() => setOpen(!open)}
+              className="text-3xl cursor-pointer"
+            >
+              {open ? <IoMdClose /> : <IoMdMenu />}
+            </div>
+          </div>
+          {open && (
+            <div className="absolute right-0 mt-16 mr-4 md:hidden top-1">
+              <ul className="bg-white shadow-md">
+                {[...leftMenuItems, ...rightMenuItems].map((item, index) => (
+                  <li key={index} className="p-2 hover:text-primary">
+                    <Link href={item.href} onClick={()=> setOpen(false)}>{item.text}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
+      </div>
     );
 };
 

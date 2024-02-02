@@ -1,21 +1,15 @@
 import React from 'react';
-import { useRouter } from 'next/router';
 import CarListCard from "@/components/car-show/car-shelf/car-card/car-card";
 import FilterForm, { FilterFormSort } from '@/components/form';
 import type { TCars } from '@/services/cars';
-import NorthamptonInfoComponent from "./northampton-info";
-import SystonInfoComponent from "./syston-info";
 import OpeningHoursComponent from "./opening-hours";
+import UnifiedInfoComponent from './unified-info';
 
 interface CarShowComponentProps {
   cars: TCars['stockResponse'];
 }
 
 const CarShowComponent: React.FC<CarShowComponentProps> = ({ cars }) => {
-  const router = useRouter();
-
-  const isNorthamptonRoute = router.asPath.includes("/northampton");
-  const isSystonRoute = router.asPath.includes('/syston');
 
   return (
     <div className="flex flex-col -mt-10">
@@ -30,8 +24,7 @@ const CarShowComponent: React.FC<CarShowComponentProps> = ({ cars }) => {
           <CarListCard stockResponse={cars} />
         </div>
         <div className="md:col-span-3 mt-[50px]">
-          {!isSystonRoute && <NorthamptonInfoComponent />}
-          {!isNorthamptonRoute && <SystonInfoComponent />}
+          <UnifiedInfoComponent/>
           <OpeningHoursComponent />
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React from 'react'
-import NorthamptonInfoComponent from '../car-show/northampton-info';
-import SystonInfoComponent from '../car-show/syston-info';
+
 import OpeningHoursComponent from '../car-show/opening-hours';
+import UnifiedInfoComponent from '../car-show/unified-info';
 
 const PartExchangeComponent = () => {
   return (
@@ -21,8 +21,7 @@ const PartExchangeComponent = () => {
             </p>
           </div>
           <div className="md:col-span-3 mt-[50px]">
-            <NorthamptonInfoComponent />
-            <SystonInfoComponent />
+            <UnifiedInfoComponent/>
             <OpeningHoursComponent />
           </div>
         </div>

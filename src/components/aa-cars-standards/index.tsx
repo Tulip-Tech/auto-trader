@@ -1,8 +1,7 @@
 import React from 'react'
-import NorthamptonInfoComponent from '../car-show/northampton-info';
-import SystonInfoComponent from '../car-show/syston-info';
 import OpeningHoursComponent from '../car-show/opening-hours';
 import Image from 'next/image';
+import UnifiedInfoComponent from '../car-show/unified-info';
 
 const AACarsStandardsComponent = () => {
   return (
@@ -20,8 +19,7 @@ const AACarsStandardsComponent = () => {
             />
           </div>
           <div className="md:col-span-3 mt-[50px]">
-            <NorthamptonInfoComponent />
-            <SystonInfoComponent />
+            <UnifiedInfoComponent/>
             <OpeningHoursComponent />
           </div>
         </div>

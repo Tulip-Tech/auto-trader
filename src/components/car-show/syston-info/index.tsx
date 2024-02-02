@@ -1,12 +1,16 @@
 import ContactInfoComponent from '@/components/shared/ContactInfoCard';
+import { useRouter } from 'next/router';
 import React from 'react'
 
 
 const SystonInfoComponent = () => {
+  const router = useRouter();
+  const isSystonRoute = router.asPath.includes('/syston');
+
   return (
     <>
       <ContactInfoComponent
-        location="Syston"
+        location={isSystonRoute ? "Contact Us" : "Syston"}
         phone="03301 130 458"
         mobile="07498 033 553"
         email="sales@systonautosltd.co.uk"

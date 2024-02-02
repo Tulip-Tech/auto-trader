@@ -31,13 +31,14 @@ const BnfDropdown = ({
                 className={` text-black/40 p-2 rounded ${
                     labelAlign === "top" ? "bg-slate-200" : " bg-white"
                 }`}
+                value={defaultValue}
                 onChange={e => {
                     e.preventDefault();
                     onChange(e)
                 }}
             >
                 {options.map((option, index) => (
-                    <option key={index} value={option.value} selected={option.value === defaultValue}>
+                    <option key={index} value={option.value}>
                         {option.key}
                     </option>
                 ))}

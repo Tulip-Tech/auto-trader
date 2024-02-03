@@ -4,7 +4,7 @@ import { CiMail } from 'react-icons/ci';
 import { FaPhoneAlt } from 'react-icons/fa';
 import { GrLocation } from 'react-icons/gr';
 
-interface ContactInfoProps {
+ type ContactInfoProps = {
   location: string;
   phone: string;
   mobile: string;

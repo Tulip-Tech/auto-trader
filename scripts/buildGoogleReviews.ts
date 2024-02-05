@@ -1,45 +1,28 @@
 import { writeFile } from 'fs/promises'
 import { ofetch } from 'ofetch';
 
-const filePath = 'googleReviews.json'
-const northamptonPlaceId = 'ChZDSUhNMG9nS0VJQ0FnSUNsdWFPbVNnEAE'
-// set key here
-const placesApiKey = ''
+const PLACES_API_KEY = process.env.GOOGLE_PLACE_API_KEY || null
+const BRANCHES = JSON.parse((process.env.NEXT_PUBLIC_BRANCHES || '{}')) as Record<string, Record<string, string>>
+
+const FILE_PATH = 'googleReviews.json'
 
 async function writeReviews() {
-    const googleResp = await ofetch(
-        `https://maps.googleapis.com/maps/api/place/details/json?place_id=${northamptonPlaceId}&fields=reviews%2Crating%2Cuser_ratings_total&key=${placesApiKey}&reviews_sort=newest`
-    )
+    const branchKeys = Object.keys(BRANCHES)
+    const branchValues = Object.values(BRANCHES).filter(branch => !!branch?.placeId);
+    const reviewResponses = await Promise.all(Object.values(branchValues).filter(branch => !!branch?.placeId).map(branch => ofetch<{
+        result: { rating: number, reviews: any[], user_ratings_total: number }
+    }>(
+        `https://maps.googleapis.com/maps/api/place/details/json?place_id=${branch?.placeId}&fields=reviews%2Crating%2Cuser_ratings_total&key=${PLACES_API_KEY}&reviews_sort=newest`
+    )))
 
-    //check if the Google API reviews total is different to what we have stored.
-    const googleDirectReviews = googleResp as any
-    const googleDirectReviewData = googleDirectReviews.data.result
-    const googleReviews = {
-        reviews: [],
-        averageRating: 0,
-        totalReviewCount: 0,
-    }
-    if (googleDirectReviewData) {
-        googleReviews.averageRating = googleDirectReviewData.rating
-        googleReviews.totalReviewCount = googleDirectReviewData.user_ratings_total
-
-        // Filter out any below 4.6 rating, and that already appear in the file according to the timestamps (no id in the feed sadly)
-        const newReviews = googleDirectReviewData.reviews.filter((item: any) => item.rating > 4.6)
-        // Map the newReviews to the shape of the object.
-        googleReviews.reviews = newReviews.map((review: any) => {
-            return {
-                reviewAuthor: review.author_name,
-                reviewAuthorImage: review.profile_photo_url,
-                reviewDate: review.relative_time_description,
-                reviewRating: review.rating,
-                reviewText: review.text,
-                reviewUrl: review.author_url,
-                rawDate: review.time,
-            }
-        })
+    const googleReviews: Record<string, any> = {}
+    for (let j = 0; j < reviewResponses.length; j++) {
+        googleReviews[branchKeys[j]] = {
+            ...reviewResponses[j]?.result || {},
+        }
     }
 
-    await writeFile(filePath, JSON.stringify(googleReviews))
+    await writeFile(FILE_PATH, JSON.stringify(googleReviews))
     console.log('✨ Wrote google reviews to file')
 }
 

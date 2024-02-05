@@ -1,9 +1,10 @@
 {
-  "name": "auto-trader",
-  "version": "0.1.0",
+  "name": "bnf-cars-spike",
+  "version": "1.0.0-beta",
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node -r jiti/register ./scripts/buildGoogleReviews",
     "build": "next build",
     "start": "next start -p 8089",
     "lint": "next lint"

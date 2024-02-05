@@ -1,7 +1,7 @@
 import { writeFile } from 'fs/promises'
 import { ofetch } from 'ofetch';
 
-const PLACES_API_KEY = process.env.GOOGLE_PLACE_API_KEY || null
+const PLACES_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_PLACE_API_KEY || null
 const BRANCHES = JSON.parse((process.env.NEXT_PUBLIC_BRANCHES || '{}')) as Record<string, Record<string, string>>
 
 const FILE_PATH = 'googleReviews.json'
@@ -24,6 +24,7 @@ async function writeReviews() {
 
     await writeFile(FILE_PATH, JSON.stringify(googleReviews))
     console.log('✨ Wrote google reviews to file')
+    console.log(googleReviews)
 }
 
 writeReviews()

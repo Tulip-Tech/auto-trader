@@ -1,7 +1,12 @@
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react'
 import { FaAngleRight } from 'react-icons/fa';
 
 const UsedVehicleComponent = () => {
+  const router = useRouter()
+  const locationPrefix = router.asPath.includes('northampton') ? 'northampton' : router.asPath.includes('syston') ? 'syston' : '';
+
   return (
     <div className="bg-primary">
       <div className="mx-auto px-10 md:px-20 space-y-8 py-16">
@@ -13,41 +18,53 @@ const UsedVehicleComponent = () => {
           <div>
             <ul className="space-y-4 text-sm">
               <li>
-                <div className="flex gap-1 text-white items-center">
+                <Link
+                  href={`/${locationPrefix}/?page=1&make=Audi`}
+                  className="flex gap-1 text-white items-center"
+                >
                   <FaAngleRight size={20} />
                   <p className="font-medium text-white text-base">Used AUDI</p>
-                </div>
+                </Link>
               </li>
               <li>
-                <div className="flex gap-1 text-white items-center">
+                <Link
+                  href={`/${locationPrefix}/?page=1&make=Honda`}
+                  className="flex gap-1 text-white items-center"
+                >
                   <FaAngleRight size={20} />
                   <p className="font-medium text-white text-base">Used HONDA</p>
-                </div>
+                </Link>
               </li>
-
               <li>
-                <div className="flex gap-1 text-white items-center">
+                <Link
+                  href={`/${locationPrefix}/?page=1&make=Mazda`}
+                  className="flex gap-1 text-white items-center"
+                >
                   <FaAngleRight size={20} />
                   <p className="font-medium text-white text-base">Used MAZDA</p>
-                </div>
+                </Link>
               </li>
-
               <li>
-                <div className="flex gap-1 text-white items-center">
+                <Link
+                  href={`/${locationPrefix}/?page=1&make=Renault`}
+                  className="flex gap-1 text-white items-center"
+                >
                   <FaAngleRight size={20} />
                   <p className="font-medium text-white text-base">
                     Used RENAULT
                   </p>
-                </div>
+                </Link>
               </li>
-
               <li>
-                <div className="flex gap-1 text-white items-center">
+                <Link
+                  href={`/${locationPrefix}/?page=1&make=Volkswagen`}
+                  className="flex gap-1 text-white items-center"
+                >
                   <FaAngleRight size={20} />
                   <p className="font-medium text-white text-base">
                     Used VOLKSWAGEN
                   </p>
-                </div>
+                </Link>
               </li>
             </ul>
           </div>
@@ -55,32 +72,42 @@ const UsedVehicleComponent = () => {
           <div>
             <ul className="mt-6 space-y-4 text-sm">
               <li>
-                <div className="flex gap-1 text-white items-center">
+                <Link
+                  href={`/${locationPrefix}/?page=1&make=Dacia`}
+                  className="flex gap-1 text-white items-center"
+                >
                   <FaAngleRight size={20} />
                   <p className="font-medium text-white text-base">Used DACIA</p>
-                </div>
+                </Link>
               </li>
               <li>
-                <div className="flex gap-1 text-white items-center">
+                <Link
+                  href={`/${locationPrefix}/?page=1&make=Hyundai`}
+                  className="flex gap-1 text-white items-center"
+                >
                   <FaAngleRight size={20} />
                   <p className="font-medium text-white text-base">
                     Used HYUNDAI
                   </p>
-                </div>
+                </Link>
               </li>
-
               <li>
-                <div className="flex gap-1 text-white items-center">
+                <Link
+                  href={`/${locationPrefix}/?page=1&make=Mini`}
+                  className="flex gap-1 text-white items-center"
+                >
                   <FaAngleRight size={20} />
                   <p className="font-medium text-white text-base">Used MINI</p>
-                </div>
+                </Link>
               </li>
-
               <li>
-                <div className="flex gap-1 text-white items-center">
+                <Link
+                  href={`/${locationPrefix}/?page=1&make=Tesla`}
+                  className="flex gap-1 text-white items-center"
+                >
                   <FaAngleRight size={20} />
                   <p className="font-medium text-white text-base">Used TESLA</p>
-                </div>
+                </Link>
               </li>
             </ul>
           </div>
@@ -88,36 +115,46 @@ const UsedVehicleComponent = () => {
           <div>
             <ul className="mt-6 space-y-4 text-sm">
               <li>
-                <div className="flex gap-1 text-white items-center">
+                <Link
+                  href={`/${locationPrefix}/?page=1&make=Fiat`}
+                  className="flex gap-1 text-white items-center"
+                >
                   <FaAngleRight size={20} />
                   <p className="font-medium text-white text-base">Used FIAT</p>
-                </div>
+                </Link>
               </li>
               <li>
-                <div className="flex gap-1 text-white items-center">
+                <Link
+                  href={`/${locationPrefix}/?page=1&make=Jaguar`}
+                  className="flex gap-1 text-white items-center"
+                >
                   <FaAngleRight size={20} />
                   <p className="font-medium text-white text-base">
                     Used JAGUAR
                   </p>
-                </div>
+                </Link>
               </li>
-
               <li>
-                <div className="flex gap-1 text-white items-center">
+                <Link
+                  href={`/${locationPrefix}/?page=1&make=Nissan`}
+                  className="flex gap-1 text-white items-center"
+                >
                   <FaAngleRight size={20} />
                   <p className="font-medium text-white text-base">
                     Used NISSAN
                   </p>
-                </div>
+                </Link>
               </li>
-
               <li>
-                <div className="flex gap-1 text-white items-center">
+                <Link
+                  href={`/${locationPrefix}/?page=1&make=Toyota`}
+                  className="flex gap-1 text-white items-center"
+                >
                   <FaAngleRight size={20} />
                   <p className="font-medium text-white text-base">
                     Used TOYOTA
                   </p>
-                </div>
+                </Link>
               </li>
             </ul>
           </div>
@@ -125,34 +162,44 @@ const UsedVehicleComponent = () => {
           <div>
             <ul className="mt-6 space-y-4 text-sm">
               <li>
-                <div className="flex gap-1 text-white items-center">
+                <Link
+                  href={`/${locationPrefix}/?page=1&make=Ford`}
+                  className="flex gap-1 text-white items-center"
+                >
                   <FaAngleRight size={20} />
                   <p className="font-medium text-white text-base">Used FORD</p>
-                </div>
+                </Link>
               </li>
               <li>
-                <div className="flex gap-1 text-white items-center">
+                <Link
+                  href={`/${locationPrefix}/?page=1&make=Lexus`}
+                  className="flex gap-1 text-white items-center"
+                >
                   <FaAngleRight size={20} />
                   <p className="font-medium text-white text-base">Used LEXUS</p>
-                </div>
+                </Link>
               </li>
-
               <li>
-                <div className="flex gap-1 text-white items-center">
+                <Link
+                  href={`/${locationPrefix}/?page=1&make=Peugeot`}
+                  className="flex gap-1 text-white items-center"
+                >
                   <FaAngleRight size={20} />
                   <p className="font-medium text-white text-base">
                     Used PEUGEOT
                   </p>
-                </div>
+                </Link>
               </li>
-
               <li>
-                <div className="flex gap-1 text-white items-center">
+                <Link
+                  href={`/${locationPrefix}/?page=1&make=Vauxhall`}
+                  className="flex gap-1 text-white items-center"
+                >
                   <FaAngleRight size={20} />
                   <p className="font-medium text-white text-base">
                     Used VAUXHALL
                   </p>
-                </div>
+                </Link>
               </li>
             </ul>
           </div>
@@ -162,4 +209,4 @@ const UsedVehicleComponent = () => {
   );
 }
 
-export default UsedVehicleComponent
+export default UsedVehicleComponent;

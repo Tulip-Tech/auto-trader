@@ -3,6 +3,7 @@
   "version": "1.0.0-beta",
   "private": true,
   "scripts": {
+    "predev": "node -r jiti/register ./scripts/buildGoogleReviews",
     "dev": "next dev",
     "prebuild": "node -r jiti/register ./scripts/buildGoogleReviews",
     "build": "next build",

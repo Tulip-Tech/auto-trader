@@ -76,7 +76,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
           <div className="relative max-w-screen-xl w-full h-full">
             <button
               onClick={toggleModal}
-              className="absolute top-32 right-0 m-4 text-white text-2xl cursor-pointer px-4 py-2 bg-gray-700 rounded-full hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50"
+              className="absolute top-0  right-0 m-4 text-white text-2xl cursor-pointer px-4 py-2 bg-gray-700 rounded-full hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50"
               aria-label="Close modal"
             >
               &times;
@@ -89,18 +89,20 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
               className="object-contain w-3/4  h-full mx-auto"
             />
           </div>
-          <button
-            onClick={() => navigate("left")}
-            className="absolute top-1/2 left-56 transform -translate-y-1/2 bg-[#EA580D] text-white px-3 py-1"
-          >
-            &lt;
-          </button>
-          <button
-            onClick={() => navigate("right")}
-            className="absolute top-1/2 right-56 transform -translate-y-1/2 bg-[#EA580D] text-white px-3 py-1 rounded-sm"
-          >
-            &gt;
-          </button>
+          <section className=" absolute flex gap-10 bottom-5">
+            <button
+              onClick={() => navigate("left")}
+              className=" transform -translate-y-1/2 bg-[#EA580D] text-white px-3 py-1"
+            >
+              &lt;
+            </button>
+            <button
+              onClick={() => navigate("right")}
+              className="   transform -translate-y-1/2 bg-[#EA580D] text-white px-3 py-1 rounded-sm"
+            >
+              &gt;
+            </button>
+          </section>
         </div>
       )}
     </div>

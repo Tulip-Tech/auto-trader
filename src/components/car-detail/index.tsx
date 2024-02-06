@@ -35,7 +35,10 @@ const CarDetailsComponent = () => {
               </div>
             ))}
           </section>
-          <span className="mt-3 text-3xl font-semibold">{data.price}</span>
+          <span className="my-3 text-3xl font-semibold">{data.price}</span>
+          <div className="flex flex-wrap gap-5 mx-auto place-content-center">
+            <UnifiedInfoComponent />
+          </div>
         </div>
       </div>
     </>

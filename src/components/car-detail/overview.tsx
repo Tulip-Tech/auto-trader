@@ -17,7 +17,7 @@ const CarDescription: React.FC<CarDetailsProps> = ({ description }) => {
   return (
     <div className="flex flex-wrap  gap-5 text-sm text-gray-700">
       {detail[2] && (
-        <section className="flex gap-4">
+        <section className="flex gap-4 w-[195px]">
           <IoMdSpeedometer size={20} className="bg-white w-12 h-12 p-2" />
           <span className="flex flex-col mt-1">
             <span className="font-semibold">Mileage</span>
@@ -26,7 +26,7 @@ const CarDescription: React.FC<CarDetailsProps> = ({ description }) => {
         </section>
       )}
       {detail[0] && (
-        <section className="flex gap-4">
+        <section className="flex gap-4 w-[195px]">
           <CiCalendar size={20} className="bg-white w-12 h-12 p-2" />
           <span className="flex flex-col mt-2">
             <span className="font-semibold">Registration</span>
@@ -35,7 +35,7 @@ const CarDescription: React.FC<CarDetailsProps> = ({ description }) => {
         </section>
       )}
       {detail[9] ? (
-        <section className="flex gap-4">
+        <section className="flex gap-4 w-[195px]">
           <FiUser size={20} className="bg-white w-12 h-12 p-2" />
           <span className="flex flex-col mt-2">
             <span className="font-semibold">Owners</span>
@@ -44,7 +44,7 @@ const CarDescription: React.FC<CarDetailsProps> = ({ description }) => {
         </section>
       ) : null}
       {detail[5] && (
-        <section className="flex gap-4">
+        <section className="flex gap-4 w-[195px]">
           <PiGasPump size={20} className="bg-white w-12 h-12 p-2" />
           <span className="flex flex-col mt-2">
             <span className="font-semibold">Fuel type</span>
@@ -53,7 +53,7 @@ const CarDescription: React.FC<CarDetailsProps> = ({ description }) => {
         </section>
       )}
       {detail[1] && (
-        <section className="flex gap-4">
+        <section className="flex gap-4 w-[195px]">
           <IoCarOutline size={20} className="bg-white w-12 h-12 p-2" />
           <span className="flex flex-col mt-2">
             <span className="font-semibold">Body type</span>
@@ -62,7 +62,7 @@ const CarDescription: React.FC<CarDetailsProps> = ({ description }) => {
         </section>
       )}
       {detail[3] && (
-        <section className="flex gap-4">
+        <section className="flex gap-4 w-[195px]">
           <PiEngine size={20} className="bg-white w-12 h-12 p-2" />
           <span className="flex flex-col mt-2">
             <span className="font-semibold">Engine</span>
@@ -71,7 +71,7 @@ const CarDescription: React.FC<CarDetailsProps> = ({ description }) => {
         </section>
       )}
       {detail[4] && (
-        <section className="flex gap-4">
+        <section className="flex gap-4 w-[195px]">
           <GiGearStickPattern size={20} className="bg-white w-12 h-12 p-2" />
           <span className="flex flex-col mt-2">
             <span className="font-semibold">Gearbox Manual</span>
@@ -80,7 +80,7 @@ const CarDescription: React.FC<CarDetailsProps> = ({ description }) => {
         </section>
       )}
       {detail[6] && (
-        <section className="flex gap-4">
+        <section className="flex gap-4 w-[195px]">
           <GiCarDoor size={20} className="bg-white w-12 h-12 p-2" />
           <span className="flex flex-col mt-2">
             <span className="font-semibold">Doors</span>
@@ -89,7 +89,7 @@ const CarDescription: React.FC<CarDetailsProps> = ({ description }) => {
         </section>
       )}
       {detail[7] && (
-        <section className="flex gap-4">
+        <section className="flex gap-4 w-[195px]">
           <MdOutlineAirlineSeatReclineExtra
             size={20}
             className="bg-white w-12 h-12 p-2"
@@ -102,7 +102,7 @@ const CarDescription: React.FC<CarDetailsProps> = ({ description }) => {
       )}
 
       {detail[9] && (
-        <section className="flex gap-4">
+        <section className="flex gap-4 w-[195px]">
           <IoDocumentTextOutline size={20} className="bg-white w-12 h-12 p-2" />
           <span className="flex flex-col mt-2">
             <span className="font-semibold">Service history</span>

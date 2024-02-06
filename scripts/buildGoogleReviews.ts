@@ -21,12 +21,12 @@ async function writeReviews() {
     for (let j = 0; j < reviewResponses.length; j++) {
         googleReviews[branchKeys[j]] = {
             ...reviewResponses[j]?.result || {},
+            allReviewsLinkLrd: `${branchValues[j]?.allReviewsLink}#lrd=${branchValues[j]?.allReviewsLrd}`
         }
     }
 
     await writeFile(FILE_PATH, JSON.stringify(googleReviews))
     console.log('✨ Wrote google reviews to file')
-    console.log(googleReviews)
 }
 
 writeReviews()

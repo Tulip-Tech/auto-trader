@@ -4,6 +4,7 @@ import FilterForm, { FilterFormSort } from '@/components/form';
 import type { TCars } from '@/services/cars';
 import OpeningHoursComponent from "./opening-hours";
 import UnifiedInfoComponent from './unified-info';
+import GoogleReviewsComponent from './google-review';
 
 interface CarShowComponentProps {
     cars: TCars['stockResponse'];
@@ -15,6 +16,7 @@ const CarShowComponent: React.FC<CarShowComponentProps> = ({ cars }) => {
             <div className="grid md:grid-cols-12 gap-5 mt-2">
                 <div className="md:col-span-3 mt-[50px]">
                     <FilterForm stockResponse={cars}/>
+                    <GoogleReviewsComponent/>
                 </div>
                 <div className="md:col-span-6 space-y-2">
                     <div className="flex justify-end -mt-3 mb-6">

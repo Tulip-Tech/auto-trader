@@ -5,7 +5,7 @@ import { FaAngleRight } from 'react-icons/fa';
 
 const UsedVehicleComponent = () => {
   const router = useRouter()
-  const locationPrefix = router.asPath.includes('northampton') ? 'northampton' : router.asPath.includes('syston') ? 'syston' : '';
+  const locationPrefix = router.query.slug ? `/${router.query.slug}` : '';
 
   return (
     <div className="bg-primary">
@@ -19,7 +19,7 @@ const UsedVehicleComponent = () => {
             <ul className="space-y-4 text-sm">
               <li>
                 <Link
-                  href={`/${locationPrefix}/?page=1&make=Audi`}
+                  href={`${locationPrefix}/?page=1&make=Audi`}
                   className="flex gap-1 text-white items-center"
                 >
                   <FaAngleRight size={20} />
@@ -28,7 +28,7 @@ const UsedVehicleComponent = () => {
               </li>
               <li>
                 <Link
-                  href={`/${locationPrefix}/?page=1&make=Honda`}
+                  href={`${locationPrefix}/?page=1&make=Honda`}
                   className="flex gap-1 text-white items-center"
                 >
                   <FaAngleRight size={20} />
@@ -37,7 +37,7 @@ const UsedVehicleComponent = () => {
               </li>
               <li>
                 <Link
-                  href={`/${locationPrefix}/?page=1&make=Mazda`}
+                  href={`${locationPrefix}/?page=1&make=Mazda`}
                   className="flex gap-1 text-white items-center"
                 >
                   <FaAngleRight size={20} />
@@ -46,7 +46,7 @@ const UsedVehicleComponent = () => {
               </li>
               <li>
                 <Link
-                  href={`/${locationPrefix}/?page=1&make=Renault`}
+                  href={`${locationPrefix}/?page=1&make=Renault`}
                   className="flex gap-1 text-white items-center"
                 >
                   <FaAngleRight size={20} />
@@ -57,7 +57,7 @@ const UsedVehicleComponent = () => {
               </li>
               <li>
                 <Link
-                  href={`/${locationPrefix}/?page=1&make=Volkswagen`}
+                  href={`${locationPrefix}/?page=1&make=Volkswagen`}
                   className="flex gap-1 text-white items-center"
                 >
                   <FaAngleRight size={20} />
@@ -73,7 +73,7 @@ const UsedVehicleComponent = () => {
             <ul className="mt-6 space-y-4 text-sm">
               <li>
                 <Link
-                  href={`/${locationPrefix}/?page=1&make=Dacia`}
+                  href={`${locationPrefix}/?page=1&make=Dacia`}
                   className="flex gap-1 text-white items-center"
                 >
                   <FaAngleRight size={20} />
@@ -82,7 +82,7 @@ const UsedVehicleComponent = () => {
               </li>
               <li>
                 <Link
-                  href={`/${locationPrefix}/?page=1&make=Hyundai`}
+                  href={`${locationPrefix}/?page=1&make=Hyundai`}
                   className="flex gap-1 text-white items-center"
                 >
                   <FaAngleRight size={20} />
@@ -93,7 +93,7 @@ const UsedVehicleComponent = () => {
               </li>
               <li>
                 <Link
-                  href={`/${locationPrefix}/?page=1&make=Mini`}
+                  href={`${locationPrefix}/?page=1&make=Mini`}
                   className="flex gap-1 text-white items-center"
                 >
                   <FaAngleRight size={20} />
@@ -102,7 +102,7 @@ const UsedVehicleComponent = () => {
               </li>
               <li>
                 <Link
-                  href={`/${locationPrefix}/?page=1&make=Tesla`}
+                  href={`${locationPrefix}/?page=1&make=Tesla`}
                   className="flex gap-1 text-white items-center"
                 >
                   <FaAngleRight size={20} />
@@ -116,7 +116,7 @@ const UsedVehicleComponent = () => {
             <ul className="mt-6 space-y-4 text-sm">
               <li>
                 <Link
-                  href={`/${locationPrefix}/?page=1&make=Fiat`}
+                  href={`${locationPrefix}/?page=1&make=Fiat`}
                   className="flex gap-1 text-white items-center"
                 >
                   <FaAngleRight size={20} />
@@ -125,7 +125,7 @@ const UsedVehicleComponent = () => {
               </li>
               <li>
                 <Link
-                  href={`/${locationPrefix}/?page=1&make=Jaguar`}
+                  href={`${locationPrefix}/?page=1&make=Jaguar`}
                   className="flex gap-1 text-white items-center"
                 >
                   <FaAngleRight size={20} />
@@ -136,7 +136,7 @@ const UsedVehicleComponent = () => {
               </li>
               <li>
                 <Link
-                  href={`/${locationPrefix}/?page=1&make=Nissan`}
+                  href={`${locationPrefix}/?page=1&make=Nissan`}
                   className="flex gap-1 text-white items-center"
                 >
                   <FaAngleRight size={20} />
@@ -147,7 +147,7 @@ const UsedVehicleComponent = () => {
               </li>
               <li>
                 <Link
-                  href={`/${locationPrefix}/?page=1&make=Toyota`}
+                  href={`${locationPrefix}/?page=1&make=Toyota`}
                   className="flex gap-1 text-white items-center"
                 >
                   <FaAngleRight size={20} />
@@ -163,7 +163,7 @@ const UsedVehicleComponent = () => {
             <ul className="mt-6 space-y-4 text-sm">
               <li>
                 <Link
-                  href={`/${locationPrefix}/?page=1&make=Ford`}
+                  href={`${locationPrefix}/?page=1&make=Ford`}
                   className="flex gap-1 text-white items-center"
                 >
                   <FaAngleRight size={20} />
@@ -172,7 +172,7 @@ const UsedVehicleComponent = () => {
               </li>
               <li>
                 <Link
-                  href={`/${locationPrefix}/?page=1&make=Lexus`}
+                  href={`${locationPrefix}/?page=1&make=Lexus`}
                   className="flex gap-1 text-white items-center"
                 >
                   <FaAngleRight size={20} />
@@ -181,7 +181,7 @@ const UsedVehicleComponent = () => {
               </li>
               <li>
                 <Link
-                  href={`/${locationPrefix}/?page=1&make=Peugeot`}
+                  href={`${locationPrefix}/?page=1&make=Peugeot`}
                   className="flex gap-1 text-white items-center"
                 >
                   <FaAngleRight size={20} />
@@ -192,7 +192,7 @@ const UsedVehicleComponent = () => {
               </li>
               <li>
                 <Link
-                  href={`/${locationPrefix}/?page=1&make=Vauxhall`}
+                  href={`${locationPrefix}/?page=1&make=Vauxhall`}
                   className="flex gap-1 text-white items-center"
                 >
                   <FaAngleRight size={20} />

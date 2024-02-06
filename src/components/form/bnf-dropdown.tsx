@@ -9,7 +9,7 @@ interface DropdownFieldProps {
     fieldName: string;
     defaultValue: string
     options: DropdownOption[];
-    onChange: (e: React.FormEvent<HTMLElement>) => void;
+    onChange: (value: string) => void;
     labelAlign?: "top" | "left";
 }
 
@@ -22,19 +22,17 @@ const BnfDropdown = ({
                      }: DropdownFieldProps) => {
     return (
         <section
-            className={`${
-                labelAlign === "top" ? "grid  self-left" : " flex gap-2 self-end"
-            }`}
+            className={`flex justify-center gap-2 ${labelAlign === "top" ? "flex-col" : "flex-row"}`}
         >
             <span className="font-semibold my-auto">{fieldName}</span>
             <select
-                className={` text-black/40 p-2 rounded ${
+                className={` text-black/40 p-2 rounded w-full ${
                     labelAlign === "top" ? "bg-slate-200" : " bg-white"
                 }`}
                 value={defaultValue}
                 onChange={e => {
                     e.preventDefault();
-                    onChange(e)
+                    onChange(e.target.value)
                 }}
             >
                 {options.map((option, index) => (

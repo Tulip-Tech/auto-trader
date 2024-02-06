@@ -1,8 +1,5 @@
 import { ofetch } from "ofetch";
 
-export const NORTHAMPTON_DEALER = '10038946'
-export const SYSTON_DEALER = '10028885'
-
 type TText = {
     paragraphs: Array<{
         mainText: string
@@ -44,7 +41,7 @@ export type TCars = {
         }
     }
     stockResponse: {
-        hasMoreResults: true
+        hasMoreResults: boolean
         currentPage: number
         totalPages: number
         totalResults: number
@@ -127,6 +124,14 @@ export type TCars = {
     }
 }
 
-export const getCars = async <T = TCars>(queries: string, dealer = NORTHAMPTON_DEALER) => ofetch<T>(
-    `https://autotrader.co.uk/json/dealers/stock?advanced=true&advertising-location=at_cars&advertising-location=at_profile_cars&dealer=${dealer}${queries ? `&${queries}` : ''}`
-).catch(() => ({} as T))
+export const getCars = async <T = TCars>(searchParams: URLSearchParams, dealer: string) => {
+    if (!searchParams.has('sort')) {
+        searchParams.append('sort', 'price-asc')
+    }
+    if (searchParams.has('slug')) {
+        searchParams.delete('slug')
+    }
+    const url = `https://autotrader.co.uk/json/dealers/stock?advanced=true&advertising-location=at_cars&advertising-location=at_profile_cars&dealer=${dealer}${searchParams.size ? `&${searchParams.toString()}` : ''}`
+    console.log(url);
+    return ofetch<T>(url).catch(() => ({} as T))
+}

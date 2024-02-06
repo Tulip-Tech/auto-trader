@@ -1,49 +1,10 @@
 import React, { FormEvent, useState } from "react";
 import { useRouter } from "next/router";
-import BnfInput from "./bnf-input";
 import BnfDropdown from "@/components/form/bnf-dropdown";
 import { TCars } from '@/services/cars';
 
-const makeOptionKeyValue: Array<{ key: string, value: string }> = [
-    { key: "Any", value: "" },
-    { key: "Audi", value: "Audi" },
-    { key: "Citroen", value: "Citroen" },
-    { key: "Dacia", value: "Dacia" },
-    { key: "Ford", value: "Ford" },
-    { key: "Honda", value: "Honda" },
-    { key: "Hyundai", value: "Hyundai" },
-    { key: "Jaguar", value: "Jaguar" },
-    { key: "Lexus", value: "Lexus" },
-    { key: "Mazda", value: "Mazda" },
-    { key: "Mercedes-Benz", value: "Mercedes-Benz" },
-    { key: "MINI", value: "MINI" },
-    { key: "Nissan", value: "Nissan" },
-    { key: "Peugeot", value: "Peugeot" },
-    { key: "Renault", value: "Renault" },
-    { key: "Skoda", value: "Skoda" },
-    { key: "Tesla", value: "Tesla" },
-    { key: "Toyota", value: "Toyota" },
-    { key: "Vauxhall", value: "Vauxhall" },
-    { key: "Volkswagen", value: "Volkswagen" },
-];
-const modelOptionKeyValue: Array<{ key: string, value: string }> = [{ key: "Any", value: "" }];
-const colourOptionKeyValue: Array<{ key: string, value: string }> = [
-    { key: "Any", value: "" },
-    { key: "Black", value: "Black" },
-    { key: "Blue", value: "Blue" },
-    { key: "Brown", value: "Brown" },
-    { key: "Green", value: "Green" },
-    { key: "Grey", value: "Grey" },
-    { key: "Red", value: "Red" },
-    { key: "Silver", value: "Silver" },
-    { key: "White", value: "White" },
-    { key: "Yellow", value: "Yellow" },
-];
-const sortOptions = [
-    { key: "Price (Lowest)", value: "price-asc" },
-    { key: "Price (Highest)", value: "price-desc" },
-    { key: "Age (Newest First)", value: "year-desc" },
-    { key: "Mileage", value: "mileage" },
+const anyOptions: Array<{ key: string, value: string }> = [
+    { key: "Any", value: "" }
 ];
 
 type TFilterForm = {
@@ -58,6 +19,24 @@ const FilterForm = ({ stockResponse }: TFilterForm) => {
     const [maxPrice, setMaxPrice] = useState("");
     const [colour, setColour] = useState("");
 
+    React.useEffect(() => {
+        if (router.query['make']) {
+            setMake(router.query['make'] as string)
+        }
+        if (router.query['model']) {
+            setModel(router.query['model'] as string)
+        }
+        if (router.query['price-from']) {
+            setMinPrice(router.query['price-from'] as string)
+        }
+        if (router.query['price-to']) {
+            setMaxPrice(router.query['price-to'] as string)
+        }
+        if (router.query['colour']) {
+            setColour(router.query['colour'] as string)
+        }
+    }, [router.query])
+
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
 
@@ -66,7 +45,7 @@ const FilterForm = ({ stockResponse }: TFilterForm) => {
         if (make) router.query['make'] = make
         else delete router.query['make']
 
-        if (model) router.query['model'] = make
+        if (model) router.query['model'] = model
         else delete router.query['model']
 
         if (minPrice) router.query['price-from'] = minPrice
@@ -105,52 +84,57 @@ const FilterForm = ({ stockResponse }: TFilterForm) => {
             <div className="flex flex-col gap-5 px-5">
                 <BnfDropdown
                     labelAlign="top"
-                    onChange={(e) => {
-                        // @ts-ignore
-                        setMake(e.target.value);
-                    }}
-                    defaultValue={make || router.query['make'] as string}
-                    options={makeOptionKeyValue}
-                    fieldName="Make:"
+                    onChange={setMake}
+                    fieldName="Make"
+                    defaultValue={make}
+                    options={anyOptions.concat(stockResponse?.searchOptions?.options?.['make']?.map(k => ({
+                        key: `${k.displayName}(${k.count})`,
+                        value: k.uriValue
+                    }))).filter(Boolean)}
                 />
                 <BnfDropdown
                     labelAlign="top"
-                    onChange={(e) => {
-                        // @ts-ignore
-                        setModel(e.target.value);
-                    }}
-                    defaultValue={model || router.query['model'] as string}
-                    options={modelOptionKeyValue}
+                    onChange={setModel}
                     fieldName="Model"
+                    defaultValue={model}
+                    options={anyOptions.concat(stockResponse?.searchOptions?.options?.['model']?.map(k => ({
+                        key: `${k.displayName}(${k.count})`,
+                        value: k.uriValue
+                    }))).filter(Boolean)}
                 />
 
-                <section>
-                    <span>Price</span>
-                    <section className="grid md:grid-cols-2 gap-3">
-                        <BnfInput
-                            defaultValue={maxPrice || router.query['price-from'] as string}
-                            placeholder="Min (Any)"
-                            onChange={(e) => setMinPrice(e.target.value)}
-                            type="number"
-                        />
-                        <BnfInput
-                            defaultValue={maxPrice || router.query['price-to'] as string}
-                            placeholder="Max (Any)"
-                            onChange={(e) => setMaxPrice(e.target.value)}
-                            type="number"
-                        />
-                    </section>
+                <section className="flex flex-row gap-3">
+                    <BnfDropdown
+                        labelAlign="top"
+                        onChange={setMinPrice}
+                        fieldName="Price: From"
+                        defaultValue={minPrice}
+                        options={anyOptions.concat(stockResponse?.searchOptions?.options?.['price-from']?.map(k => ({
+                            key: `${k.displayName}(${k.count})`,
+                            value: k.uriValue
+                        }))).filter(Boolean)}
+                    />
+                    <BnfDropdown
+                        labelAlign="top"
+                        onChange={setMaxPrice}
+                        fieldName="To"
+                        defaultValue={maxPrice}
+                        options={anyOptions.concat(stockResponse?.searchOptions?.options?.['price-to']?.map(k => ({
+                            key: `${k.displayName}(${k.count})`,
+                            value: k.uriValue
+                        }))).filter(Boolean)}
+                    />
                 </section>
 
                 <BnfDropdown
                     labelAlign="top"
-                    onChange={(e) => {
-                        // @ts-ignore
-                        setColour(e.target.value)
-                    }}
-                    defaultValue={colour || router.query['colour'] as string}
-                    options={colourOptionKeyValue}
+                    onChange={setColour}
                     fieldName="Colour"
+                    defaultValue={colour}
+                    options={anyOptions.concat(stockResponse?.searchOptions?.options?.['colour']?.map(k => ({
+                        key: `${k.displayName}(${k.count})`,
+                        value: k.uriValue
+                    }))).filter(Boolean)}
                 />
             </div>
             <div className="px-5">
@@ -165,21 +149,19 @@ const FilterForm = ({ stockResponse }: TFilterForm) => {
     );
 };
 
-export const FilterFormSort = () => {
+export const FilterFormSort = ({ options }: { options: TCars['stockResponse']['sortOptions'] }) => {
     const router = useRouter()
-    const handleSort = (e: React.FormEvent<HTMLElement>) => {
+    const handleSort = (sort: string) => {
         router.query['page'] = String(1)
-        // @ts-ignore
-        const sort = e.currentTarget.value;
         if (sort) router.query['sort'] = sort
         else delete router.query['sort']
         router.push(router);
     };
 
     return <BnfDropdown
-        defaultValue={router.query['sort'] as string}
+        defaultValue={options.find(f => f.isPreselected || f.isSelected)?.value || router.query['sort'] as string}
         onChange={handleSort}
-        options={sortOptions}
+        options={options.map(k => ({ key: k.name, value: k.value }))}
         fieldName="Sort:"
     />
 }

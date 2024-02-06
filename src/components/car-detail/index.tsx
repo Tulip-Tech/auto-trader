@@ -1,11 +1,9 @@
-import React, { useState } from "react";
-import OpeningHoursComponent from "../car-show/opening-hours";
-import Image from "next/image";
+import React from "react";
 import UnifiedInfoComponent from "../car-show/unified-info";
 import { data } from "./dummy";
 import ImageSlider from "./image-slider";
-import { IoMdSpeedometer } from "react-icons/io";
 import CarDescription from "./overview";
+
 const CarDetailsComponent = () => {
   return (
     <>

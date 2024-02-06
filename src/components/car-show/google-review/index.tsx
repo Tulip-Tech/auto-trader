@@ -12,7 +12,7 @@ const GoogleReviewsComponent: React.FC = () => {
 
     const getReviews = React.useCallback(() => {
         const slug = router.query.slug as string
-        return (slug ? googleReviews[slug as keyof typeof googleReviews]?.reviews : Object.values(googleReviews).flatMap((k) => k?.reviews)).filter(Boolean)
+        return (slug ? googleReviews[slug as keyof typeof googleReviews]?.reviews : Object.values(googleReviews).flatMap((k) => k?.reviews))?.filter(Boolean)
     }, [router.query.slug]);
 
     const getAllReviewsLinkLrds = React.useCallback(() => {
@@ -23,7 +23,7 @@ const GoogleReviewsComponent: React.FC = () => {
         }] : Object.keys(googleReviews).flatMap((k) => ({
             text: `View all ${k} google reviews`,
             link: googleReviews[k as keyof typeof googleReviews]?.allReviewsLinkLrd
-        }))).filter(Boolean)
+        })))?.filter(Boolean)
     }, [router.query.slug]);
 
     const renderStars = (rating: number) => {

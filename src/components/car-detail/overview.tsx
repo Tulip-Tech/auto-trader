@@ -6,6 +6,7 @@ import { IoMdSpeedometer } from "react-icons/io";
 import { IoCarOutline, IoDocumentTextOutline } from "react-icons/io5";
 import { MdOutlineAirlineSeatReclineExtra } from "react-icons/md";
 import { PiEngine, PiGasPump } from "react-icons/pi";
+import DetailComponent from "./overview-card";
 
 interface CarDetailsProps {
   description: string;
@@ -17,98 +18,75 @@ const CarDescription: React.FC<CarDetailsProps> = ({ description }) => {
   return (
     <div className="flex flex-wrap  gap-5 text-sm text-gray-700">
       {detail[2] && (
-        <section className="flex gap-4 w-[195px]">
-          <IoMdSpeedometer size={20} className="bg-white w-12 h-12 p-2" />
-          <span className="flex flex-col mt-1">
-            <span className="font-semibold">Mileage</span>
-            {detail[2]}
-          </span>
-        </section>
+        <DetailComponent
+          detail={detail[2]}
+          icon={<IoMdSpeedometer size={20} />}
+          title="Mileage"
+        />
       )}
       {detail[0] && (
-        <section className="flex gap-4 w-[195px]">
-          <CiCalendar size={20} className="bg-white w-12 h-12 p-2" />
-          <span className="flex flex-col mt-2">
-            <span className="font-semibold">Registration</span>
-            {detail[0]}
-          </span>
-        </section>
+        <DetailComponent
+          detail={detail[0]}
+          icon={<CiCalendar size={20} className="bg-white w-12 h-12 p-2" />}
+          title="Registration"
+        />
       )}
       {detail[9] ? (
-        <section className="flex gap-4 w-[195px]">
-          <FiUser size={20} className="bg-white w-12 h-12 p-2" />
-          <span className="flex flex-col mt-2">
-            <span className="font-semibold">Owners</span>
-            {detail[8].replace("owner", "")}
-          </span>
-        </section>
+        <DetailComponent
+          detail={detail[8].replace("owner", "")}
+          icon={<FiUser size={20} className="bg-white w-12 h-12 p-2" />}
+          title="Owners"
+        />
       ) : null}
       {detail[5] && (
-        <section className="flex gap-4 w-[195px]">
-          <PiGasPump size={20} className="bg-white w-12 h-12 p-2" />
-          <span className="flex flex-col mt-2">
-            <span className="font-semibold">Fuel type</span>
-            {detail[5]}
-          </span>
-        </section>
+        <DetailComponent
+          detail={detail[5]}
+          icon={<PiGasPump size={20} />}
+          title="Fuel type"
+        />
       )}
       {detail[1] && (
-        <section className="flex gap-4 w-[195px]">
-          <IoCarOutline size={20} className="bg-white w-12 h-12 p-2" />
-          <span className="flex flex-col mt-2">
-            <span className="font-semibold">Body type</span>
-            {detail[1]}
-          </span>
-        </section>
+        <DetailComponent
+          detail={detail[1]}
+          icon={<IoCarOutline size={20} />}
+          title="Body type"
+        />
       )}
       {detail[3] && (
-        <section className="flex gap-4 w-[195px]">
-          <PiEngine size={20} className="bg-white w-12 h-12 p-2" />
-          <span className="flex flex-col mt-2">
-            <span className="font-semibold">Engine</span>
-            {detail[3]}
-          </span>
-        </section>
+        <DetailComponent
+          detail={detail[3]}
+          icon={<PiEngine size={20} />}
+          title="Engine"
+        />
       )}
       {detail[4] && (
-        <section className="flex gap-4 w-[195px]">
-          <GiGearStickPattern size={20} className="bg-white w-12 h-12 p-2" />
-          <span className="flex flex-col mt-2">
-            <span className="font-semibold">Gearbox Manual</span>
-            {detail[4]}
-          </span>
-        </section>
+        <DetailComponent
+          detail={detail[4]}
+          icon={<GiGearStickPattern size={20} />}
+          title="Gearbox"
+        />
       )}
       {detail[6] && (
-        <section className="flex gap-4 w-[195px]">
-          <GiCarDoor size={20} className="bg-white w-12 h-12 p-2" />
-          <span className="flex flex-col mt-2">
-            <span className="font-semibold">Doors</span>
-            {detail[6].replace("doors", "")}
-          </span>
-        </section>
+        <DetailComponent
+          detail={detail[6].replace("doors", "").trim()}
+          icon={<GiCarDoor size={20} />}
+          title="Doors"
+        />
       )}
       {detail[7] && (
-        <section className="flex gap-4 w-[195px]">
-          <MdOutlineAirlineSeatReclineExtra
-            size={20}
-            className="bg-white w-12 h-12 p-2"
-          />
-          <span className="flex flex-col mt-2">
-            <span className="font-semibold">Seats</span>
-            {detail[7].replace("seats", "")}
-          </span>
-        </section>
+        <DetailComponent
+          detail={detail[7].replace("seats", "").trim()}
+          icon={<MdOutlineAirlineSeatReclineExtra size={20} />}
+          title="Seats"
+        />
       )}
 
       {detail[9] && (
-        <section className="flex gap-4 w-[195px]">
-          <IoDocumentTextOutline size={20} className="bg-white w-12 h-12 p-2" />
-          <span className="flex flex-col mt-2">
-            <span className="font-semibold">Service history</span>
-            {detail[9].replace("service history", "")}
-          </span>
-        </section>
+        <DetailComponent
+          detail={detail[9].replace("service history", "").trim()}
+          icon={<IoDocumentTextOutline size={20} />}
+          title="Service history"
+        />
       )}
     </div>
   );

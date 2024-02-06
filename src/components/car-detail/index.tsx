@@ -7,17 +7,18 @@ import ImageSlider from "./image-slider";
 import { IoMdSpeedometer } from "react-icons/io";
 import CarDescription from "./overview";
 const CarDetailsComponent = () => {
-  const [selectedImg, setSelectedImg] = useState<string>(data.images[0].src);
   return (
     <>
-      <div className="flex space-x-10">
+      <div className="grid grid-cols-2 space-x-10">
         <div>
           <ImageSlider images={data.images} />
           <section className="flex flex-col space-y-3 mt-10 ">
             <span className="text-3xl font-bold">Overview</span>
             <span className="text-xl">{data.attentionGrabber}</span>
-            <section>
+            <section className="flex flex-col">
               <CarDescription description={data.description} />
+              <span className="mt-5 text-2xl font-bold">Description</span>
+              <span>{data.summaryDescription}</span>
             </section>
           </section>
         </div>

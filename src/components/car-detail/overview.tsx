@@ -15,7 +15,7 @@ const CarDescription: React.FC<CarDetailsProps> = ({ description }) => {
   const detail = description.split("|").map((detail) => detail.trim());
 
   return (
-    <div className="flex flex-wrap gap-5 text-sm text-gray-700">
+    <div className="flex flex-wrap  gap-5 text-sm text-gray-700">
       {detail[2] && (
         <section className="flex gap-4">
           <IoMdSpeedometer size={20} className="bg-white w-12 h-12 p-2" />

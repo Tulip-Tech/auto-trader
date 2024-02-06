@@ -25,14 +25,14 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
     }
   };
   return (
-    <div className="flex flex-col items-center space-y-4 max-w-[600px]">
-      <div className="relative w-full max-w-[600px] ">
+    <div className="flex flex-col items-center space-y-4 w-full">
+      <div className="relative  w-full ">
         <Image
           width={600}
           height={560}
           src={images[selectedIndex].src}
           alt="Selected"
-          className="max-w-[600px] h-auto "
+          className="w-full h-auto "
         />
 
         <button

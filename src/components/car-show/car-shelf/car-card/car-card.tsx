@@ -5,6 +5,7 @@ import { TCars } from '@/services/cars';
 import RatingLabel from '@/components/car-show/car-shelf/car-card/rating';
 import { useRouter } from 'next/router';
 import { FaSpinner } from "react-icons/fa";
+import { ofetch } from 'ofetch';
 
 interface TCarListCard {
     stockResponse: TCars['stockResponse'];
@@ -12,14 +13,14 @@ interface TCarListCard {
 
 const CarListCard = ({ stockResponse }: TCarListCard) => {
     const router = useRouter()
-    const nextRef = React.useRef<HTMLDivElement>(null);
 
+    const nextRef = React.useRef<HTMLDivElement>(null);
+    const [hasMoreResults, setHasMoreResults] = React.useState<TCars['stockResponse']['hasMoreResults']>(false)
     const [results, setResults] = React.useState<TCars['stockResponse']['results']>([])
 
     React.useEffect(() => {
-        console.log('hey');
-        console.log(stockResponse.results);
         setResults(stockResponse.results ?? [])
+        setHasMoreResults(!!stockResponse?.hasMoreResults)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [router.query])
 
@@ -27,29 +28,26 @@ const CarListCard = ({ stockResponse }: TCarListCard) => {
         // TODO:: need to fix this infinite scrolling in respect to dynamic pages with page query change
         const nextObserver = new IntersectionObserver((entries) => {
             const target = entries[0];
-            if (target.isIntersecting && stockResponse.hasMoreResults) {
+            if (target.isIntersecting && hasMoreResults) {
                 setTimeout(() => {
-                    router.query['page'] = String(+((router.query?.['page'] as string) || 1) + 1)
-                    router.push(router, undefined, {
-                        scroll: false
-                    }).then(() => {
-                        console.log('nice');
-                        setResults(p => ([...p, ...stockResponse.results]))
+                    router.query['page'] = String(+((router.query['page'] as string) || 1) + 1)
+                    ofetch(`/api/cars?${new URLSearchParams(router.query as any).toString()}`).then((response: TCars['stockResponse']) => {
+                        setResults(p => ([...p, ...response.results]))
+                        setHasMoreResults(response.hasMoreResults)
                     })
-                }, 500)
+                }, 25)
             }
         });
         if (nextRef.current) {
             nextObserver.observe(nextRef.current);
         }
-
         return () => {
             if (nextRef.current) {
                 nextObserver.unobserve(nextRef?.current);
             }
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [router, stockResponse.hasMoreResults]);
+    }, [router.query, hasMoreResults]);
 
     return (
         <div className="flex flex-col space-y-5">
@@ -79,12 +77,12 @@ const CarListCard = ({ stockResponse }: TCarListCard) => {
                                 </section>
                                 <section className="col-span-5 grid gap-2">
                                     <div>
-                      <span className="flex text-xl gap-2 text-primary font-bold">
-                        <span>
-                          {item.titleAndSubtitle.title}{" "}
-                            {item.titleAndSubtitle.subtitle}
-                        </span>
-                      </span>
+                                      <span className="flex text-xl gap-2 text-primary font-bold">
+                                        <span>
+                                          {item.titleAndSubtitle.title}{" "}
+                                            {item.titleAndSubtitle.subtitle}
+                                        </span>
+                                      </span>
                                     </div>
                                     <div className="text-base font-normal text-slate">
                                         {item.attentionGrabber}
@@ -130,7 +128,7 @@ const CarListCard = ({ stockResponse }: TCarListCard) => {
                     </div>
                 </Link>
             ))}
-            {stockResponse.hasMoreResults && results.length && (
+            {hasMoreResults && results.length && (
                 <div ref={nextRef} className="flex justify-center w-full">
                     <div>
                         <button

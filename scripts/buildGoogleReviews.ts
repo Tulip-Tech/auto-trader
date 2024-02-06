@@ -1,14 +1,16 @@
 import { writeFile } from 'fs/promises'
 import { ofetch } from 'ofetch';
-
-const PLACES_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_PLACE_API_KEY || null
-const BRANCHES = JSON.parse((process.env.NEXT_PUBLIC_BRANCHES || '{}')) as Record<string, Record<string, string>>
+import getBranchesInfo from '../src/services/getBranchesInfo';
 
 const FILE_PATH = 'googleReviews.json'
 
 async function writeReviews() {
+    const PLACES_API_KEY = process.env.GOOGLE_PLACE_API_KEY || null
+
+    const BRANCHES = getBranchesInfo()
     const branchKeys = Object.keys(BRANCHES)
     const branchValues = Object.values(BRANCHES).filter(branch => !!branch?.placeId);
+
     const reviewResponses = await Promise.all(Object.values(branchValues).filter(branch => !!branch?.placeId).map(branch => ofetch<{
         result: { rating: number, reviews: any[], user_ratings_total: number }
     }>(

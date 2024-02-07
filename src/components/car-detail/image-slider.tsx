@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
-interface ImageType {
-  src: string;
-}
-
 interface ImageSliderProps {
-  images: ImageType[];
+  images: string[];
 }
 
 const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
@@ -35,7 +31,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
         <Image
           width={600}
           height={560}
-          src={images[selectedIndex].src}
+          src={images[selectedIndex]}
           alt="Selected"
           className="w-full h-auto"
           onClick={toggleModal}
@@ -59,7 +55,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
         {images.map((img, index) => (
           <Image
             key={index}
-            src={img.src}
+            src={img}
             alt={`Thumbnail ${index}`}
             width={56}
             height={40}
@@ -84,7 +80,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
             <Image
               width={1000}
               height={1000}
-              src={images[selectedIndex].src}
+              src={images[selectedIndex]}
               alt="Gallery View"
               className="object-contain w-3/4  h-full mx-auto"
             />

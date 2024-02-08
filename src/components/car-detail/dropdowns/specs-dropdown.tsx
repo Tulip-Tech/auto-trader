@@ -10,7 +10,7 @@ const SpecsDropdowns: React.FC<SpecDropdownsProps> = ({ techData }) => {
   const [openSizeDropdown, setOpenSizeDropdown] = useState(false);
   return (
     <div>
-      <span> Specs</span>
+      <section className="w-full text-center"> Specs</section>
       <button
         onClick={() => setOpenPerformanceDropdown(!openPerformanceDropdown)}
         className="mb-5 flex justify-between w-full text-[#EA580D] border-y-2 py-4 mt-5 "

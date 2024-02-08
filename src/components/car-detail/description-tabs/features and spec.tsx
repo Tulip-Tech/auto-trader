@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { MdArrowRightAlt } from "react-icons/md";
-import ModalFromRight from "./description-modal";
-import FeaturesDropdowns from "./dropdowns/category-dropdown";
+import ModalFromRight from "../description-modal";
+import FeaturesDropdowns from "../dropdowns/category-dropdown";
 import { TechData } from "@/interface/techData";
-import SpecsDropdowns from "./dropdowns/specs-dropdown";
+import SpecsDropdowns from "../dropdowns/specs-dropdown";
 
 interface FeaturesSpecSectionProps {
   title: string;
@@ -11,7 +11,7 @@ interface FeaturesSpecSectionProps {
   techData: TechData;
 }
 
-const DescriptionTab: React.FC<FeaturesSpecSectionProps> = ({
+const FeaturesAndSpec: React.FC<FeaturesSpecSectionProps> = ({
   title,
 
   tabTitle,
@@ -47,4 +47,4 @@ const DescriptionTab: React.FC<FeaturesSpecSectionProps> = ({
   );
 };
 
-export default DescriptionTab;
+export default FeaturesAndSpec;

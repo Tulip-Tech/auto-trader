@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { data } from "./dummy";
 import ImageSlider from "./image-slider";
 import { MdOutlineAirlineSeatReclineExtra } from "react-icons/md";
-import DescriptionTab from "./description-tab";
 import GoogleReviewsComponent from "../car-show/google-review";
 import { CiCalendar } from "react-icons/ci";
 import { FiUser } from "react-icons/fi";
@@ -12,6 +11,8 @@ import { IoCarOutline, IoDocumentTextOutline } from "react-icons/io5";
 import { PiGasPump, PiEngine } from "react-icons/pi";
 import DetailComponent from "./overview-card";
 import UnifiedInfoComponent from "../car-show/unified-info";
+import FeaturesAndSpec from "./description-tabs/features and spec";
+import RunningCostTab from "./description-tabs/running-costs";
 
 const CarDetailsComponent = () => {
   return (
@@ -129,10 +130,31 @@ const CarDetailsComponent = () => {
                 {data[0].data.search.advert.description}
               </span>
               <div className="mt-10 flex flex-col space-y-5">
-                <DescriptionTab
+                <FeaturesAndSpec
                   title={" Car Features and spec"}
                   techData={data[0].data.search.advert.specification.techData}
                   tabTitle={"Features and spec"}
+                />
+                <RunningCostTab
+                  co2Emissions={
+                    data[0].data.search.advert.specification.co2Emissions
+                  }
+                  title={"Running Costs"}
+                  taxData={data[0].data.search.advert.specification.annualTax}
+                  currency={data[0].data.search.advert.priceCurrency}
+                  tabTitle={"Running Costs"}
+                  urban={
+                    data[0].data.search.advert.specification.techData
+                      .fuelConsumptionUrban
+                  }
+                  extraUrban={
+                    data[0].data.search.advert.specification.techData
+                      .fuelConsumptionExtraUrban
+                  }
+                  average={
+                    data[0].data.search.advert.specification.techData
+                      .fuelConsumptionCombined
+                  }
                 />
               </div>
             </section>

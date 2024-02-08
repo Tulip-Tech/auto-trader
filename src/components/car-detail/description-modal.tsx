@@ -4,7 +4,7 @@ import { TechData } from "@/interface/techData";
 
 interface ModalProps {
   title: string;
-  techData: TechData;
+  techData?: TechData;
   isOpen: boolean;
   onClose: () => void;
   children?: ReactNode;
@@ -12,7 +12,6 @@ interface ModalProps {
 
 const ModalFromRight: React.FC<ModalProps> = ({
   title,
-  techData,
   isOpen,
   onClose,
   children,
@@ -65,7 +64,9 @@ const ModalFromRight: React.FC<ModalProps> = ({
             />
           </svg>
         </button> */}
-        <h2 className="text-lg font-semibold mb-5">{title}</h2>
+        <h2 className="text-lg font-semibold mb-5 w-full text-center">
+          {title}
+        </h2>
 
         {children}
         <span className="text-sm ">

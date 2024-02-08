@@ -705,7 +705,7 @@ const getSingleCarDetails = async <T = TSingleCar>(advertId: string) => {
                             }
                             __typename
                         }`
-    const generationLvl1 =`generation {
+    const generationLvl1 = `generation {
                             generationId
                             name
                             review {
@@ -723,6 +723,38 @@ const getSingleCarDetails = async <T = TSingleCar>(advertId: string) => {
                             }
                             __typename
                         }`
+    const spinLvl1 = `spin {
+                            url
+                            preview
+                            __typename
+                        }`
+    const imageListLvl1 = `imageList(limit: $numberOfImages) {
+                            nextCursor
+                            size
+                            images {
+                                url
+                                templated
+                                autotraderAllocated
+                                __typename
+                            }
+                             __typename
+                        }`
+    const vehicleCheckSummaryLvl1 = `vehicleCheckSummary {
+                            type
+                            title
+                            performed
+                            writeOffCategory
+                            checks {
+                                key
+                                failed
+                                advisory
+                                critical
+                                warning
+                                __typename
+                            }
+                            __typename
+                        }`
+
     const privateAdvertiserLvl1 = `privateAdvertiser {
                             contact {
                                 protectedNumber
@@ -738,16 +770,96 @@ const getSingleCarDetails = async <T = TSingleCar>(advertId: string) => {
                             tola
                             __typename
                         }`
+    const headingLvl1 = `heading {
+                            title
+                            subtitle
+                            __typename
+                        }`
+    const financeDefaultsLvl1 = `financeDefaults {
+                            term
+                            mileage
+                            depositAmount
+                            __typename
+                        }`
+    const videoLvl1 = `video {
+                            url
+                            preview
+                            __typename
+                        }`
+    const mileageLvl1 = `mileage {
+                            mileage
+                            unit
+                            __typename
+                        }`
 
+    const lvl1 = await Promise.all([
+        ofetch('https://www.autotrader.co.uk/at-graphql?opname=FPADataQuery', {
+            method: 'POST',
+            body: [{
+                "operationName": "FPADataQuery",
+                "variables": {
+                    "advertId": advertId,
+                    "numberOfImages": 100,
+                },
+                "query": `query FPADataQuery($advertId: String!, $numberOfImages: Int) {
+                search {
+                    advert(advertId: $advertId) {
+                        ${capabilitiesLvl1}
+                        ${generationLvl1}
+                        ${imageListLvl1}
+                        ${vehicleCheckSummaryLvl1}
+                        ${spinLvl1}
+                        __typename
+                    }
+                }
+            } `
+            }],
+        }).catch(() => ({} as Partial<T>)),
+        ofetch('https://www.autotrader.co.uk/at-graphql?opname=FPADataQuery', {
+            method: 'POST',
+            body: [{
+                "operationName": "FPADataQuery",
+                "variables": {
+                    "advertId": advertId
+                },
+                "query": `query FPADataQuery($advertId: String!) {
+                search {
+                    advert(advertId: $advertId) {
+                        ${privateAdvertiserLvl1}
+                        ${headingLvl1}
+                        ${financeDefaultsLvl1}
+                        ${videoLvl1}
+                        ${mileageLvl1}
+                        __typename
+                    }
+                }
+            } `
+            }],
+        }).catch(() => ({} as Partial<T>))
+    ])
+    const mergedData: T = lvl1.reduce((acc: T, curr: any) => {
+        console.log(curr);
+        acc = {
+            ...acc,
+            ...(curr?.[0]?.data?.search?.advert || {})
+        }
+        return acc;
+    }, {} as T)
+
+    console.log(mergedData, 'mergedData');
+
+    const dealerLvl1 = `dealer {
+                            ...DealerData
+                             __typename
+                        }`
     return ofetch('https://www.autotrader.co.uk/at-graphql?opname=FPADataQuery', {
         method: 'POST',
         body: [{
             "operationName": "FPADataQuery",
             "variables": {
                 "advertId": advertId,
-                "numberOfImages": 100,
             },
-            "query": `query FPADataQuery($advertId: String!, $numberOfImages: Int) {
+            "query": `query FPADataQuery($advertId: String!) {
                 search {
                     advert(advertId: $advertId) {
                         id
@@ -765,11 +877,6 @@ const getSingleCarDetails = async <T = TSingleCar>(advertId: string) => {
                         lastServiceDate
                         warrantyMonthsOnPurchase
                         twelveMonthsMotIncluded
-                        heading {
-                            title
-                            subtitle
-                            __typename
-                        }
                         attentionGrabber
                         rrp
                         price
@@ -793,69 +900,19 @@ const getSingleCarDetails = async <T = TSingleCar>(advertId: string) => {
                         isPartExAvailable
                         isFinanceAvailable
                         isFinanceFullApplicationAvailable
-                        financeProvider
-                        financeDefaults {
-                            term
-                            mileage
-                            depositAmount
-                            __typename
-                        }
+                        financeProvider                        
                         retailerId
                         hasClickAndCollect
                         advertiserSegment
-                        dealer {
-                            ...DealerData
-                             __typename
-                        }
-                        video {
-                            url
-                            preview
-                            __typename
-                        }
-                        spin {
-                            url
-                            preview
-                            __typename
-                        }
-                        imageList(limit: $numberOfImages) {
-                            nextCursor
-                            size
-                            images {
-                                url
-                                templated
-                                autotraderAllocated
-                                __typename
-                            }
-                             __typename
-                        }
                         priceIndicatorRating
                         priceIndicatorRatingLabel
                         priceDeviation
                         mileageDeviation
-                        mileage {
-                            mileage
-                            unit
-                            __typename
-                        }
+                        
                         plate
                         year
                         vehicleCheckId
                         vehicleCheckStatus
-                        vehicleCheckSummary {
-                            type
-                            title
-                            performed
-                            writeOffCategory
-                            checks {
-                                key
-                                failed
-                                advisory
-                                critical
-                                warning
-                                __typename
-                            }
-                            __typename
-                        }
                         sellerName
                         sellerType
                         sellerProducts

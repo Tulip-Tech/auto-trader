@@ -744,6 +744,9 @@ export const allBranchesCars = async (query: Record<string, any>) => {
 
 // TODO:: need to break down the graphQL query to return only needed data
 const getSingleCarDetails = async <T = TSingleCar>(advertId: string) => {
+  const baseUrl = 'https://www.autotrader.co.uk/at-graphql?opname=FPADataQuery'
+  console.log(`${baseUrl}/${advertId}`);
+
   const capabilitiesLvl1 = `capabilities {
                             marketExtensionHomeDelivery {
                                 enabled
@@ -857,6 +860,7 @@ const getSingleCarDetails = async <T = TSingleCar>(advertId: string) => {
                             unit
                             __typename
                         }`;
+
   const SellerDistanceLvl1 = `sellerLocationDistance {
         unit
         value
@@ -1028,6 +1032,7 @@ const getSingleCarDetails = async <T = TSingleCar>(advertId: string) => {
                __typename
             }
 }`;
+
   const financeLvl1 = `finance { 
     monthlyPayment 
     representativeApr 
@@ -1189,31 +1194,7 @@ battery {
     __typename  
 }}
     `;
-  //   missing charging data
-  //   inside tech data
 
-  //     chargingData {
-  //           fastestChargingPower
-  //           fastestChargingDuration
-  //           chargers {
-  //               description
-  //               fullCharge {
-  //                   duration
-  //                   endBatteryPercentage
-  //                    __typename
-  //               }
-  //               topUp {
-  //                   milesRange
-  //                   duration
-  //                   __typename
-  //               }
-  //               chargerLocation
-  //               milesRangePerHourChargeTime
-  //               __typename
-  //           }
-
-  //       __typename
-  //   }
   const specificationLvl1Part3 = `specification{
     techData { 
         co2Emissions 
@@ -1250,82 +1231,83 @@ battery {
         __typename
     } __typename
 }`;
-  const baseQuery2 = `
-year
-vehicleCheckId
-vehicleCheckStatus
-sellerName
-sellerType
-sellerProducts
-sellerLocation
-excludePreviousOwners
-colour
-manufacturerApproved
-insuranceWriteOffCategory                    
-stockType
-versionNumber
-tradeLifecycleStatus
-condition
-  owners`;
-  const baseQuery1 = `id
-stockItemId
-isAuction
-hoursUsed
-serviceHistory
-title
-description
-advertisedLocations
-dueAtSeller
-motExpiry
-motInsurance
-lastServiceOdometerReadingMiles
-lastServiceDate
-warrantyMonthsOnPurchase
-twelveMonthsMotIncluded
-attentionGrabber
-rrp
-price
-priceCurrency
-priceExcludingFees
-suppliedPrice
-suppliedPriceExcludingFees
-priceOnApplication
-plusVatIndicated
-vatStatus
-saving
-noAdminFees
-adminFee
-adminFeeInfoDescription
-dateOfRegistration
-homeDeliveryRegionCodes
-deliversToMyPostcode
-registration
-encryptedRegistration
-hasShowroomProductCode
-isPartExAvailable
-isFinanceAvailable
-isFinanceFullApplicationAvailable
-financeProvider
-retailerId
-hasClickAndCollect
-advertiserSegment
-priceIndicatorRating
-priceIndicatorRatingLabel
-priceDeviation
-mileageDeviation
-plate  `;
   const baseQuery = `annualTax {
-    standardRate
-    __typename
-}
-oemDrivetrain
-bikeLicenceType
-derivative
-derivativeId
-__typename
-}`;
+                      standardRate
+                      __typename
+                  }
+                  oemDrivetrain
+                  bikeLicenceType
+                  derivative
+                  derivativeId
+                  __typename
+                  }`;
+  const baseQuery1 = `id
+                      stockItemId
+                      isAuction
+                      hoursUsed
+                      serviceHistory
+                      title
+                      description
+                      advertisedLocations
+                      dueAtSeller
+                      motExpiry
+                      motInsurance
+                      lastServiceOdometerReadingMiles
+                      lastServiceDate
+                      warrantyMonthsOnPurchase
+                      twelveMonthsMotIncluded
+                      attentionGrabber
+                      rrp
+                      price
+                      priceCurrency
+                      priceExcludingFees
+                      suppliedPrice
+                      suppliedPriceExcludingFees
+                      priceOnApplication
+                      plusVatIndicated
+                      vatStatus
+                      saving
+                      noAdminFees
+                      adminFee
+                      adminFeeInfoDescription
+                      dateOfRegistration
+                      homeDeliveryRegionCodes
+                      deliversToMyPostcode
+                      registration
+                      encryptedRegistration
+                      hasShowroomProductCode
+                      isPartExAvailable
+                      isFinanceAvailable
+                      isFinanceFullApplicationAvailable
+                      financeProvider
+                      retailerId
+                      hasClickAndCollect
+                      advertiserSegment
+                      priceIndicatorRating
+                      priceIndicatorRatingLabel
+                      priceDeviation
+                      mileageDeviation
+                      plate  `;
+  const baseQuery2 = `
+                  year
+                  vehicleCheckId
+                  vehicleCheckStatus
+                  sellerName
+                  sellerType
+                  sellerProducts
+                  sellerLocation
+                  excludePreviousOwners
+                  colour
+                  manufacturerApproved
+                  insuranceWriteOffCategory                    
+                  stockType
+                  versionNumber
+                  tradeLifecycleStatus
+                  condition
+                  owners`;
+
   const lvl1 = await Promise.all([
-    ofetch("https://www.autotrader.co.uk/at-graphql?opname=FPADataQuery", {
+    ofetch(`${baseUrl}`, {
       method: "POST",
       body: [
         {
@@ -1345,8 +1327,8 @@ __typename
                        `,
         },
       ],
-    }).catch(() => ({} as T)),
-    ofetch("https://www.autotrader.co.uk/at-graphql?opname=FPADataQuery", {
+    }).catch(() => ({} as Partial<T>)),
+    ofetch(`${baseUrl}`, {
       method: "POST",
       body: [
         {
@@ -1366,8 +1348,8 @@ __typename
                      `,
         },
       ],
-    }).catch(() => ({} as T)),
-    ofetch("https://www.autotrader.co.uk/at-graphql?opname=FPADataQuery", {
+    }).catch(() => ({} as Partial<T>)),
+    ofetch(`${baseUrl}`, {
       method: "POST",
       body: [
         {
@@ -1387,8 +1369,8 @@ __typename
                        `,
         },
       ],
-    }).catch(() => ({} as T)),
-    ofetch("https://www.autotrader.co.uk/at-graphql?opname=FPADataQuery", {
+    }).catch(() => ({} as Partial<T>)),
+    ofetch(`${baseUrl}`, {
       method: "POST",
       body: [
         {
@@ -1412,7 +1394,7 @@ __typename
         },
       ],
     }).catch(() => ({} as Partial<T>)),
-    ofetch("https://www.autotrader.co.uk/at-graphql?opname=FPADataQuery", {
+    ofetch(`${baseUrl}`, {
       method: "POST",
       body: [
         {
@@ -1436,7 +1418,7 @@ __typename
         },
       ],
     }).catch(() => ({} as Partial<T>)),
-    ofetch("https://www.autotrader.co.uk/at-graphql?opname=FPADataQuery", {
+    ofetch(`${baseUrl}`, {
       method: "POST",
       body: [
         {
@@ -1459,7 +1441,7 @@ __typename
         },
       ],
     }).catch(() => ({} as Partial<T>)),
-    ofetch("https://www.autotrader.co.uk/at-graphql?opname=FPADataQuery", {
+    ofetch(`${baseUrl}`, {
       method: "POST",
       body: [
         {
@@ -1479,7 +1461,7 @@ __typename
         },
       ],
     }).catch(() => ({} as Partial<T>)),
-    ofetch("https://www.autotrader.co.uk/at-graphql?opname=FPADataQuery", {
+    ofetch(`${baseUrl}`, {
       method: "POST",
       body: [
         {
@@ -1498,7 +1480,7 @@ __typename
         },
       ],
     }).catch(() => ({} as Partial<T>)),
-    ofetch("https://www.autotrader.co.uk/at-graphql?opname=FPADataQuery", {
+    ofetch(`${baseUrl}`, {
       method: "POST",
       body: [
         {
@@ -1517,7 +1499,7 @@ __typename
         },
       ],
     }).catch(() => ({} as Partial<T>)),
-    ofetch("https://www.autotrader.co.uk/at-graphql?opname=FPADataQuery", {
+    ofetch(`${baseUrl}`, {
       method: "POST",
       body: [
         {
@@ -1536,7 +1518,7 @@ __typename
         },
       ],
     }).catch(() => ({} as Partial<T>)),
-    ofetch("https://www.autotrader.co.uk/at-graphql?opname=FPADataQuery", {
+    ofetch(`${baseUrl}`, {
       method: "POST",
       body: [
         {
@@ -1594,18 +1576,10 @@ __typename
 };
 export const singleCarDetails = async (advertId: string) => {
   const data = await getSingleCarDetails(advertId);
-  //   console.log(JSON.stringify(data), "nice", data);
   return {
     props: {
-      title: advertId,
-      car: data,
+      title: data?.title ?? advertId,
+      car: data ?? {},
     },
   };
-
-  /*return {
-        props: {
-            title: data.title,
-            car: data ?? {},
-        },
-    };*/
 };

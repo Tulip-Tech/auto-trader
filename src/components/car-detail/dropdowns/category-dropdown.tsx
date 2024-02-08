@@ -47,9 +47,11 @@ const FeaturesDropdowns: React.FC<CategoryDropdownsProps> = ({
           </button>
           {openDropdown === category && (
             <ul className="border-2 p-4 shadow-lg">
-              {groupedFeatures[category].map((description, descIndex) => (
-                <li key={descIndex}>{description}</li>
-              ))}
+              {groupedFeatures[category]
+                .slice(0, 6)
+                .map((description, descIndex) => (
+                  <li key={descIndex}>{description}</li>
+                ))}
             </ul>
           )}
         </div>

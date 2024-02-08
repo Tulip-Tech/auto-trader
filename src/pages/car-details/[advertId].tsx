@@ -2,8 +2,8 @@ import CarDetailsComponent from "@/components/car-detail";
 import { singleCarDetails, type TSingleCar } from "@/services/cars";
 
 export default function CarDetailsById({ car }: { car: TSingleCar }) {
-  console.log(car);
-  return <CarDetailsComponent />;
+  console.log(car, "car");
+  return <CarDetailsComponent car={car} />;
 }
 
 export const getServerSideProps = (ctx: any) =>

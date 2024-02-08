@@ -6,6 +6,7 @@ import RatingLabel from "@/components/car-show/car-shelf/car-card/rating";
 import { useRouter } from "next/router";
 import { FaSpinner } from "react-icons/fa";
 import { ofetch } from "ofetch";
+import getBranchesInfo from '@/services/getBranchesInfo';
 
 interface TCarListCard {
   stockResponse: TCars["stockResponse"];
@@ -13,6 +14,8 @@ interface TCarListCard {
 
 const CarListCard = ({ stockResponse }: TCarListCard) => {
   const router = useRouter();
+
+  const branches = getBranchesInfo()
 
   const nextRef = React.useRef<HTMLDivElement>(null);
   const [hasMoreResults, setHasMoreResults] =
@@ -56,6 +59,14 @@ const CarListCard = ({ stockResponse }: TCarListCard) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query, hasMoreResults]);
 
+  const getBranchNameByDealerId = React.useCallback((item: TCars['stockResponse']['results'][number]) => {
+    return Object.keys(branches).find(branch => {
+      if(branches[branch]?.dealerId === item?.dealer?.id) {
+        return branch
+      }
+    })
+  }, [branches])
+
   return (
     <div className="flex flex-col space-y-5">
       {/*className="flex flex-col space-y-5 h-[80vh] overflow-x-auto">*/}
@@ -65,7 +76,7 @@ const CarListCard = ({ stockResponse }: TCarListCard) => {
       {results?.map((item) => (
         <Link
           key={item.id}
-          href={`car-details/${item.id}`}
+          href={`/${getBranchNameByDealerId(item)}/car-details/${item.id}`}
           target="__blank"
           className="bg-white rounded-md p-3 shadow-lg relative"
         >

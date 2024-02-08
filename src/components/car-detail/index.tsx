@@ -1,5 +1,4 @@
 import React from "react";
-import { data } from "./dummy";
 import ImageSlider from "./image-slider";
 import { MdOutlineAirlineSeatReclineExtra } from "react-icons/md";
 import GoogleReviewsComponent from "../car-show/google-review";
@@ -13,7 +12,8 @@ import DetailComponent from "./overview-card";
 import UnifiedInfoComponent from "../car-show/unified-info";
 import FeaturesAndSpec from "./description-tabs/features and spec";
 import RunningCostTab from "./description-tabs/running-costs";
-import { TSingleCar } from "@/services/cars";
+import type { TSingleCar } from "@/services/cars";
+
 interface CarDetailsComponentProps {
   car: TSingleCar;
 }

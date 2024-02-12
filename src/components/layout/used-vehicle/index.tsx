@@ -9,7 +9,7 @@ const UsedVehicleComponent = () => {
 
   return (
     <div className="bg-primary">
-      <div className="mx-auto px-10 md:px-20 space-y-8 py-16">
+      <div className="mx-auto px-5 sm:px-10 md:px-20 space-y-8 py-16">
         <h2 className="text-white  font-semibold text-4xl text-center">
           USED VEHICLE MAKES CURRENTLY IN STOCK
         </h2>

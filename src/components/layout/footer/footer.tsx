@@ -22,7 +22,7 @@ const FooterComponent = () => {
         <p className="pt-2 text-sky-600 text-xs">back to top</p>
       </div>
       <footer className="bg-lightergray">
-        <div className="mx-auto px-20 space-y-8 py-16  lg:space-y-16">
+        <div className="mx-auto px-5 sm:px-10 md:px-20 space-y-8 py-16  lg:space-y-16">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             <div className="">
               <div className="text-teal-600">
@@ -47,7 +47,7 @@ const FooterComponent = () => {
             </div>
 
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-2">
-              <div className="mx-auto">
+              <div className="sm:mx-auto">
                 <p className="text-slate text-2xl font-semibold">Company</p>
 
                 <ul className="mt-6 space-y-4 text-sm">
@@ -103,7 +103,7 @@ const FooterComponent = () => {
                 </ul>
               </div>
 
-              <div className="mx-auto">
+              <div className="sm:mx-auto">
                 <p className="text-slate text-2xl font-semibold">Follow us</p>
 
                 <ul className="mt-6 text-sm flex items-center gap-4">
@@ -155,7 +155,7 @@ const FooterComponent = () => {
                       className="w-full border-none focus:border-transparent focus:ring-transparent sm:text-sm"
                     />
                   </div>
-                  <button className="mt-1 w-full bg-primary px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-none hover:bg-teal-600 sm:mt-0 sm:w-auto sm:shrink-0">
+                  <button className="mt-1 bg-primary px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-none hover:bg-teal-600 sm:mt-0 sm:w-auto sm:shrink-0">
                     <GoRocket />
                   </button>
                 </form>

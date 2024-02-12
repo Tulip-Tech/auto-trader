@@ -80,8 +80,8 @@ const CarListCard = ({ stockResponse }: TCarListCard) => {
           target="__blank"
           className="bg-white rounded-md p-3 shadow-lg relative"
         >
-          <div className="grid grid-cols-12 gap-2">
-            <div className="col-span-10 gap-2">
+          <div className="grid grid-cols-12 gap-2 px-5">
+            <div className="sm:col-span-10 col-span-9 gap-2">
               <div className="grid grid-cols-8 gap-x-5">
                 <section className="col-span-3">
                   <Image
@@ -95,7 +95,7 @@ const CarListCard = ({ stockResponse }: TCarListCard) => {
                 </section>
                 <section className="col-span-5 grid gap-2">
                   <div>
-                    <span className="flex text-xl gap-2 text-primary font-bold">
+                    <span className="flex text-lg lg:text-xl gap-2 text-primary font-bold">
                       <span>
                         {item.titleAndSubtitle.title}{" "}
                         {item.titleAndSubtitle.subtitle}
@@ -131,7 +131,7 @@ const CarListCard = ({ stockResponse }: TCarListCard) => {
                 ))}
               </div>
             </div>
-            <div className="col-span-2 border-l-2 text-2xl text-center grid content-between p-2">
+            <div className="col-span-3 sm:col-span-2 border-l-2 text-lg sm:text-xl lg:text-2xl text-center grid content-between p-1 sm:p-2 sm:justify-center">
               <div>
                 {item.price}
                 <RatingLabel rating={item.priceIndicator.rating} />

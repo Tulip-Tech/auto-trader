@@ -12,24 +12,29 @@ interface CarShowComponentProps {
 
 const CarShowComponent: React.FC<CarShowComponentProps> = ({ cars }) => {
     return (
-        <div className="flex flex-col -mt-10">
-            <div className="grid md:grid-cols-12 gap-5 mt-2">
-                <div className="md:col-span-3 mt-[50px]">
-                    <FilterForm stockResponse={cars}/>
-                    <GoogleReviewsComponent/>
-                </div>
-                <div className="md:col-span-6 space-y-2">
-                    <div className="flex justify-end -mt-3 mb-6">
-                        <FilterFormSort options={cars.sortOptions}/>
-                    </div>
-                    <CarListCard stockResponse={cars}/>
-                </div>
-                <div className="md:col-span-3 mt-[50px]">
-                    <UnifiedInfoComponent/>
-                    <OpeningHoursComponent/>
-                </div>
+      <div className="flex flex-col -mt-10">
+        <div className="grid md:grid-cols-12 gap-5 mt-2">
+          <div className="md:col-span-3 mt-[50px]">
+            <FilterForm stockResponse={cars} />
+            <div className="hidden sm:block">
+              <GoogleReviewsComponent />
             </div>
+          </div>
+          <div className="md:col-span-6 space-y-2">
+            <div className="flex justify-end -mt-3 mb-6">
+              <FilterFormSort options={cars.sortOptions} />
+            </div>
+            <CarListCard stockResponse={cars} />
+          </div>
+          <div className="md:col-span-3 mt-[50px]">
+            <UnifiedInfoComponent />
+            <OpeningHoursComponent />
+          </div>
+          <div className="block sm:hidden">
+            <GoogleReviewsComponent />
+          </div>
         </div>
+      </div>
     );
 };
 

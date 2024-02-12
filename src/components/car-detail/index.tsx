@@ -20,15 +20,37 @@ interface CarDetailsComponentProps {
 
 const CarDetailsComponent: React.FC<CarDetailsComponentProps> = ({ car }) => {
   return (
-    <>
-      <div className="grid grid-cols-2 space-x-10">
-        <div>
+    <div>
+      <div className="sm:grid grid-cols-12 gap-8">
+        <div className="col-span-8">
           <ImageSlider images={car.imageList?.images.map((item) => item.url)} />
-          <section className="flex flex-col space-y-3 mt-10 ">
+          <div className="block sm:hidden mt-10">
+            <p className="text-3xl font-semibold">{car.heading.title}</p>
+            <p className="text-xl">{car.heading.subtitle}</p>
+
+            <section className="flex flex-wrap gap-4 mt-3">
+              <div className="bg-white p-2  text-sm">
+                {`${car.mileage.mileage} ${car.mileage.unit.toLowerCase()}s `}
+              </div>
+              <div className="bg-white p-2 text-sm">
+                {car.dateOfRegistration.split("-")[0] + ""}
+              </div>
+              <div className="bg-white p-2  text-sm">
+                {car.specification?.transmission}
+              </div>
+              <div className="bg-white p-2 text-sm">
+                {car.specification?.fuel}
+              </div>
+            </section>
+            <p className="my-3 text-3xl font-semibold">
+              {car.priceCurrency + car.price}
+            </p>
+          </div>
+          <section className="flex flex-col space-y-3 mt-10">
             <span className="text-3xl font-bold">Overview</span>
             <span className="text-xl">{car.attentionGrabber}</span>
             <section className="flex flex-col">
-              <div className="flex flex-wrap  gap-5 text-sm text-gray-700">
+              <div className="flex flex-wrap gap-5 text-sm text-gray-700">
                 {car.mileage && (
                   <DetailComponent
                     detail={`${
@@ -119,7 +141,7 @@ const CarDetailsComponent: React.FC<CarDetailsComponentProps> = ({ car }) => {
                   />
                 )}
               </div>
-              <span className="mt-5 text-2xl font-bold">Description</span>
+              <span className="mt-16 mb-5 text-2xl font-bold">Description</span>
               <span className="h-48 overflow-y-scroll after:cont">
                 {car.description}
               </span>
@@ -145,34 +167,36 @@ const CarDetailsComponent: React.FC<CarDetailsComponentProps> = ({ car }) => {
             </section>
           </section>
         </div>
+        <div className="col-span-4 mt-16 sm:mt-0">
+          <div className="sm:block hidden">
+            <p className="text-3xl font-semibold">{car.heading.title}</p>
+            <p className="text-xl">{car.heading.subtitle}</p>
 
-        <div className="flex flex-col">
-          <span className="text-3xl font-semibold">{car.heading.title}</span>
-          <span className="text-xl">{car.heading.subtitle}</span>
-          <section className="flex flex-wrap  ">
-            <div className="bg-white p-2 mr-4 mt-2 text-sm">
-              {`${car.mileage.mileage} ${car.mileage.unit.toLowerCase()}s `}
-            </div>
-            <div className="bg-white p-2 mr-4 mt-2 text-sm">
-              {car.dateOfRegistration.split("-")[0] + ""}
-            </div>
-            <div className="bg-white p-2 mr-4 mt-2 text-sm">
-              {car.specification?.transmission}
-            </div>
-            <div className="bg-white p-2 mr-4 mt-2 text-sm">
-              {car.specification?.fuel}
-            </div>
-          </section>
-          <span className="my-3 text-3xl font-semibold">
-            {car.priceCurrency + car.price}
-          </span>
-          <div className="flex flex-wrap gap-5 mx-auto place-content-center">
+            <section className="flex flex-wrap gap-4 mt-3">
+              <div className="bg-white p-2  text-sm">
+                {`${car.mileage.mileage} ${car.mileage.unit.toLowerCase()}s `}
+              </div>
+              <div className="bg-white p-2 text-sm">
+                {car.dateOfRegistration.split("-")[0] + ""}
+              </div>
+              <div className="bg-white p-2  text-sm">
+                {car.specification?.transmission}
+              </div>
+              <div className="bg-white p-2 text-sm">
+                {car.specification?.fuel}
+              </div>
+            </section>
+            <p className="my-3 text-3xl font-semibold">
+              {car.priceCurrency + car.price}
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-5 mx-auto place-content-center my-10">
             <UnifiedInfoComponent />
           </div>
           <GoogleReviewsComponent />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

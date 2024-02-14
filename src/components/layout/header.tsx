@@ -46,7 +46,7 @@ const HeaderComponent = () => {
                             <Image
                                 priority
                                 src="/footer/B&F-03.png"
-                                alt="logo"
+                                alt="bnf-logo"
                                 width={170}
                                 height={100}
                             />

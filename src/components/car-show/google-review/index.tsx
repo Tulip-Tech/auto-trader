@@ -53,13 +53,13 @@ const GoogleReviewsComponent: React.FC = () => {
     };
 
     return (
-      <div>
+      <div className="md:m-5">
         <div className="rounded-lg bg-white p-2 shadow-sm sm:p-4 my-4">
           <div className="flex justify-center items-center">
             <Image
               priority
               src="/google-review/google-reviews.png"
-              alt="logo"
+              alt="bnf-google-reviews-logo"
               width={150}
               height={50}
             />
@@ -68,13 +68,13 @@ const GoogleReviewsComponent: React.FC = () => {
         {getReviews()
           .slice(0, 3)
           .map((review, index) => {
-            if (!review?.text || review.text.trim() === "") return null; 
+            if (!review?.text || review.text.trim() === "") return null;
             return (
               <div
                 key={index}
                 className="rounded-lg bg-white p-4 shadow-sm sm:p-6 my-2"
               >
-                <div className="flex gap-4">
+                <div className="flex flex-wrap gap-4">
                   <img
                     alt="Person"
                     src={review?.profile_photo_url}
@@ -98,7 +98,7 @@ const GoogleReviewsComponent: React.FC = () => {
                 key={item.link}
                 href={item.link}
                 target="__blank"
-                className="flex gap-2 justify-center items-center"
+                className="flex gap-2 items-center"
               >
                 <FcGoogle />
                 <p className="text-sm font-bold underline">{item.text}</p>

@@ -32,7 +32,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
           width={600}
           height={560}
           src={images[selectedIndex]}
-          alt="Selected"
+          alt="selected-image"
           className="w-full h-auto"
           onClick={toggleModal}
         />
@@ -56,7 +56,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
           <Image
             key={index}
             src={img}
-            alt={`Thumbnail ${index}`}
+            alt={`thumbnail-${index}`}
             width={56}
             height={40}
             onClick={() => setSelectedIndex(index)}
@@ -81,7 +81,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
               width={1000}
               height={1000}
               src={images[selectedIndex]}
-              alt="Gallery View"
+              alt="gallery-view"
               className="object-contain w-3/4  h-full mx-auto"
             />
           </div>

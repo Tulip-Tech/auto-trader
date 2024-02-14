@@ -30,7 +30,7 @@ const FooterComponent = () => {
                   <Image
                     priority
                     src="/footer/B&F-03.png"
-                    alt="logo"
+                    alt="bnf-footer-logo"
                     width={418}
                     height={133}
                   />
@@ -112,7 +112,7 @@ const FooterComponent = () => {
                       <Image
                         priority
                         src="/footer/linkedin.svg"
-                        alt="logo"
+                        alt="bnf-linkedin-logo"
                         width={68}
                         height={68}
                       />
@@ -124,7 +124,7 @@ const FooterComponent = () => {
                       <Image
                         priority
                         src="/footer/fb.svg"
-                        alt="logo"
+                        alt="bnf-facebook-logo"
                         width={68}
                         height={68}
                       />
@@ -136,7 +136,7 @@ const FooterComponent = () => {
                       <Image
                         priority
                         src="/footer/youtube.svg"
-                        alt="logo"
+                        alt="bnf-youtube-logo"
                         width={68}
                         height={68}
                       />
@@ -155,7 +155,7 @@ const FooterComponent = () => {
                       className="w-full border-none focus:border-transparent focus:ring-transparent sm:text-sm"
                     />
                   </div>
-                  <button className="mt-1 bg-primary px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-none hover:bg-teal-600 sm:mt-0 sm:w-auto sm:shrink-0">
+                  <button type="button" aria-label="subscribe-button" className="mt-1 bg-primary px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-none hover:bg-teal-600 sm:mt-0 sm:w-auto sm:shrink-0">
                     <GoRocket />
                   </button>
                 </form>

@@ -88,7 +88,7 @@ const CarListCard = ({ stockResponse }: TCarListCard) => {
                   <Image
                     priority
                     src={item.images?.[0]?.src}
-                    alt={item.images?.[0]?.src}
+                    alt={item.images?.[0]?.src || 'car-logo'}
                     height={182}
                     width={198}
                     className="rounded-md w-full"

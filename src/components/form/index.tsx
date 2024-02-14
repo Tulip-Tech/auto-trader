@@ -37,8 +37,13 @@ const FilterForm = ({ stockResponse }: TFilterForm) => {
         }
     }, [router.query])
 
-    const handleSubmit = (event: FormEvent) => {
-        event.preventDefault();
+    React.useEffect(() => {
+        handleSubmit()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [make, model, minPrice, maxPrice, colour])
+
+    const handleSubmit = (event?: FormEvent) => {
+        event?.preventDefault();
 
         router.query['page'] = String(1)
 
@@ -103,7 +108,7 @@ const FilterForm = ({ stockResponse }: TFilterForm) => {
                     }))).filter(Boolean)}
                 />
 
-                <section className="flex flex-row gap-3">
+                {/*<section className="flex flex-row gap-3">
                     <BnfDropdown
                         labelAlign="top"
                         onChange={setMinPrice}
@@ -135,16 +140,16 @@ const FilterForm = ({ stockResponse }: TFilterForm) => {
                         key: `${k.displayName}(${k.count})`,
                         value: k.uriValue
                     }))).filter(Boolean)}
-                />
+                />*/}
             </div>
-            <div className="px-5">
+            {/*<div className="px-5">
                 <button
                     type="submit"
                     className="w-full bg-primary text-white p-2 rounded"
                 >
                     Search
                 </button>
-            </div>
+            </div>*/}
         </form>
     );
 };

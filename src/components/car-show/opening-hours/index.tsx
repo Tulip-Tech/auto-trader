@@ -51,7 +51,7 @@ const OpeningHoursComponent = () => {
             <Image
               priority
               src="/contact-info/opening-hour-banner.svg"
-              alt="logo"
+              alt="bnf-opening-hour-logo"
               width={249}
               height={91}
               className="w-full"
@@ -61,7 +61,7 @@ const OpeningHoursComponent = () => {
             <Image
               priority
               src="/contact-info/hpi.svg"
-              alt="logo"
+              alt="bnf-hpi-logo"
               width={249}
               height={91}
               className="w-full"

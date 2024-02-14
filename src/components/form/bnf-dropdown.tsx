@@ -24,9 +24,10 @@ const BnfDropdown = ({
         <section
             className={`flex justify-center gap-2 ${labelAlign === "top" ? "flex-col" : "flex-row"}`}
         >
-            <span className="font-semibold my-auto">{fieldName}</span>
+            <label className="font-semibold my-auto" htmlFor={fieldName}>{fieldName}</label>
             <select
-                className={` text-black/40 p-2 rounded w-full ${
+                aria-label={fieldName}
+                className={` text-gray-500 p-2 rounded w-full ${
                     labelAlign === "top" ? "bg-slate-200" : " bg-white"
                 }`}
                 value={defaultValue}

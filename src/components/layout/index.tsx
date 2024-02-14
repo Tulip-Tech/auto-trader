@@ -75,12 +75,12 @@ const AppLayout = ({ children, className }: Props) => {
         </ol>
       </nav>
 
-      <div className="px-5 sm:px-10 md:px-20">{children}</div>
-      <div className="px-5 sm:px-10 md:px-20 sm:py-16 py-8">
+      <div className="px-2 sm:px-5 md:px-10 lg:px-20">{children}</div>
+      <div className="px-2 sm:px-5 md:px-10 lg:px-20 sm:py-16 py-8">
         <Image
           priority
           src="/footer/hc-bdc-large.gif"
-          alt="logo"
+          alt="bnf-bdc-logo"
           width={850}
           height={160}
           className="w-full"

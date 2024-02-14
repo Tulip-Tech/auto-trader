@@ -12,7 +12,7 @@ const AACarsStandardsComponent = () => {
             <Image
               priority
               src="/aa-cars-standards/AACarsStandards.png"
-              alt="logo"
+              alt="bnf-aacars-logo"
               width={955}
               height={1194}
               className="w-full h-full"

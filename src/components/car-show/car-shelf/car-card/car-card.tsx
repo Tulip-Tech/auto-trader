@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { FaSpinner } from "react-icons/fa";
 import { ofetch } from "ofetch";
 import getBranchesInfo from '@/services/getBranchesInfo';
+import ImageSlider from "@/components/car-detail/image-slider";
 
 interface TCarListCard {
   stockResponse: TCars["stockResponse"];
@@ -62,7 +63,7 @@ const CarListCard = ({ stockResponse }: TCarListCard) => {
   const getBranchNameByDealerId = React.useCallback((item: TCars['stockResponse']['results'][number]) => {
     return Object.keys(branches).find(branch => {
       if(branches[branch]?.dealerId === item?.dealer?.id) {
-        return branch
+        return branch;
       }
     })
   }, [branches])
@@ -80,20 +81,27 @@ const CarListCard = ({ stockResponse }: TCarListCard) => {
           target="__blank"
           className="bg-white rounded-md p-3 shadow-lg relative"
         >
-          <div className="grid grid-cols-12 gap-2 px-5">
+          <div className="sm:grid grid-cols-12 gap-2 px-5">
             <div className="sm:col-span-10 col-span-9 gap-2">
-              <div className="grid grid-cols-8 gap-x-5">
-                <section className="col-span-3">
+              <div className="sm:grid grid-cols-8 gap-x-5">
+                <section className="col-span-3 py-2 sm:py-0 hidden sm:block">
                   <Image
                     priority
                     src={item.images?.[0]?.src}
                     alt={item.images?.[0]?.src}
                     height={182}
                     width={198}
-                    className="rounded-md"
+                    className="rounded-md w-full"
                   />
                 </section>
-                <section className="col-span-5 grid gap-2">
+                <div className="sm:hidden block">
+                  <div className="flex flex-row flex-wrap gap-2 mt-4">
+                    <ImageSlider
+                      images={item.images?.map((item) => item.src)}
+                    />
+                  </div>
+                </div>
+                <section className="col-span-5 grid gap-2 py-3 sm:py-0">
                   <div>
                     <span className="flex text-lg lg:text-xl gap-2 text-primary font-bold">
                       <span>
@@ -116,22 +124,25 @@ const CarListCard = ({ stockResponse }: TCarListCard) => {
                   </div>
                 </section>
               </div>
-              <div className="flex flex-row flex-wrap gap-2 mt-4">
-                {item.images.map((img, index) => (
-                  <section key={index}>
-                    <Image
-                      priority
-                      src={img.src}
-                      width={80}
-                      height={60}
-                      alt={`${item.id}-image-${index}`}
-                      className="rounded-lg overflow-hidden"
-                    />
-                  </section>
-                ))}
+              <div className="hidden sm:block">
+                {" "}
+                <div className="flex flex-row flex-wrap gap-2 mt-4">
+                  {item.images.map((img, index) => (
+                    <section key={index}>
+                      <Image
+                        priority
+                        src={img.src}
+                        width={80}
+                        height={60}
+                        alt={`${item.id}-image-${index}`}
+                        className="rounded-lg overflow-hidden"
+                      />
+                    </section>
+                  ))}
+                </div>
               </div>
             </div>
-            <div className="col-span-3 sm:col-span-2 border-l-2 text-lg sm:text-xl lg:text-2xl text-center grid content-between p-1 sm:p-2 sm:justify-center">
+            <div className="col-span-3 sm:col-span-2 sm:border-l-2 sm:border-t-0 border-t-2  text-lg sm:text-xl lg:text-2xl text-center sm:grid content-between p-1 sm:p-2 sm:justify-center flex justify-between py-2 sm:py-0">
               <div>
                 {item.price}
                 <RatingLabel rating={item.priceIndicator.rating} />

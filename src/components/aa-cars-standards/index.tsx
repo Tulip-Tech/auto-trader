@@ -6,7 +6,7 @@ import UnifiedInfoComponent from '../car-show/unified-info';
 const AACarsStandardsComponent = () => {
   return (
     <>
-      <div className="flex flex-col -mt-10">
+      <div className="flex flex-col">
         <div className="grid md:grid-cols-12 gap-5 mt-2">
           <div className="md:col-span-9 space-y-2 mt-[50px]">
             <Image
@@ -19,7 +19,7 @@ const AACarsStandardsComponent = () => {
             />
           </div>
           <div className="md:col-span-3 mt-[50px]">
-            <UnifiedInfoComponent/>
+            <UnifiedInfoComponent />
             <OpeningHoursComponent />
           </div>
         </div>

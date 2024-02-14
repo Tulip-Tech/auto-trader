@@ -5,7 +5,7 @@ import UnifiedInfoComponent from '../car-show/unified-info';
 const ContactUsComponent = () => {
   return (
     <>
-      <div className="flex flex-col -mt-10">
+      <div className="flex flex-col">
         <div className="grid md:grid-cols-12 gap-5 mt-2">
           <div className="md:col-span-9 space-y-16">
             <div>

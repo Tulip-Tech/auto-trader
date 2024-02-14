@@ -20,7 +20,7 @@ const ContactInfoComponent: React.FC<ContactInfoProps> = ({
   address,
 }) => {
   return (
-    <div className="max-w-sm overflow-hidden shadow-lg bg-white mb-4 rounded-lg">
+    <div className="w-full overflow-hidden shadow-lg bg-white mb-4 rounded-lg">
       <div className="">
         <div className="flex flex-col space-y-1 text-center border-b p-5 bg-primary text-white">
           <span className="font-semibold">{location}</span>

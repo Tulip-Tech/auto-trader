@@ -18,19 +18,8 @@ const AppLayout = ({ children, className }: Props) => {
 
   const pathSegments = router.asPath.split('?')[0].split('/').filter((v) => v.length > 0);
 
-  let heading;
-  if (pathSegments.includes("northampton")) {
-    heading = "All Cars from B&F Cars Northampton";
-  } else if (pathSegments.includes("syston")) {
-    heading = "All Cars from Syston Autos Ltd.";
-  } else if (pathSegments.length === 0) {
-    heading = "All Cars from B&F Cars";
-  } else {
-    heading = "";
-  }
-
   const breadcrumbs = pathSegments.map((segment, index) => {
-    const href = '/' + pathSegments.slice(0, index + 1).join('/');
+    const href = "/" + pathSegments.slice(0, index + 1).join("/");
     const name = segment.charAt(0).toUpperCase() + segment.slice(1);
     return { name, href };
   });
@@ -44,7 +33,9 @@ const AppLayout = ({ children, className }: Props) => {
           <li>
             <Link href="/" passHref className="flex gap-1 items-center">
               <IoMdHome />
-              <p className="block transition hover:text-gray-700 text-xs sm:text-base">Home</p>
+              <p className="block transition hover:text-gray-700 text-xs sm:text-base">
+                Home
+              </p>
             </Link>
           </li>
           {breadcrumbs.length === 0 && (
@@ -84,11 +75,8 @@ const AppLayout = ({ children, className }: Props) => {
         </ol>
       </nav>
 
-      <h2 className="text-slate text-3xl font-bold mb-3 px-5 sm:px-10 md:px-20 mt-6">
-        {heading}
-      </h2>
       <div className="px-5 sm:px-10 md:px-20">{children}</div>
-      <div className="px-20 py-16">
+      <div className="px-5 sm:px-10 md:px-20 sm:py-16 py-8">
         <Image
           priority
           src="/footer/hc-bdc-large.gif"

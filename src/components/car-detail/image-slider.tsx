@@ -39,13 +39,13 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
 
         <button
           onClick={() => navigate("left")}
-          className="absolute top-1/2 left-5 transform -translate-y-1/2 bg-[#EA580D] text-white px-3 py-1"
+          className="absolute top-1/2 sm:left-5 left-0 transform -translate-y-1/2 bg-[#EA580D] text-white px-3 py-1"
         >
           &lt;
         </button>
         <button
           onClick={() => navigate("right")}
-          className="absolute top-1/2 right-5 transform -translate-y-1/2 bg-[#EA580D] text-white px-3 py-1 rounded-sm"
+          className="absolute top-1/2 sm:right-5 right-0 transform -translate-y-1/2 bg-[#EA580D] text-white px-3 py-1 rounded-sm"
         >
           &gt;
         </button>

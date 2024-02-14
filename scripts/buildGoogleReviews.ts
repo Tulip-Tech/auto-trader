@@ -14,7 +14,7 @@ async function writeReviews() {
     const reviewResponses = await Promise.all(Object.values(branchValues).filter(branch => !!branch?.placeId).map(branch => ofetch<{
         result: { rating: number, reviews: any[], user_ratings_total: number }
     }>(
-        `https://maps.googleapis.com/maps/api/place/details/json?place_id=${branch?.placeId}&fields=reviews%2Crating%2Cuser_ratings_total&key=${PLACES_API_KEY}&reviews_sort=newest`
+        `https://maps.googleapis.com/maps/api/place/details/json?place_id=${branch?.placeId}&fields=reviews%2Crating%2Cuser_ratings_total&key=${PLACES_API_KEY}&reviews_sort=relevant`
     )))
 
     const googleReviews: Record<string, any> = {}

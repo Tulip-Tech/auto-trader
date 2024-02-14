@@ -15,10 +15,9 @@ interface TCarListCard {
 
 const CarListCard = ({ stockResponse }: TCarListCard) => {
   const router = useRouter();
-
   const branches = getBranchesInfo()
 
-  const nextRef = React.useRef<HTMLDivElement>(null);
+  const [loadMoreLoading, setLoadMoreLoading] = React.useState<boolean>(false)
   const [hasMoreResults, setHasMoreResults] =
     React.useState<TCars["stockResponse"]["hasMoreResults"]>(false);
   const [results, setResults] = React.useState<
@@ -31,35 +30,6 @@ const CarListCard = ({ stockResponse }: TCarListCard) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query]);
 
-  React.useEffect(() => {
-    // TODO:: need to fix this infinite scrolling in respect to dynamic pages with page query change
-    const nextObserver = new IntersectionObserver((entries) => {
-      const target = entries[0];
-      if (target.isIntersecting && hasMoreResults) {
-        setTimeout(() => {
-          router.query["page"] = String(
-            +((router.query["page"] as string) || 1) + 1
-          );
-          ofetch(
-            `/api/cars?${new URLSearchParams(router.query as any).toString()}`
-          ).then((response: TCars["stockResponse"]) => {
-            setResults((p) => [...p, ...response.results]);
-            setHasMoreResults(response.hasMoreResults);
-          });
-        }, 25);
-      }
-    });
-    if (nextRef.current) {
-      nextObserver.observe(nextRef.current);
-    }
-    return () => {
-      if (nextRef.current) {
-        nextObserver.unobserve(nextRef?.current);
-      }
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router.query, hasMoreResults]);
-
   const getBranchNameByDealerId = React.useCallback((item: TCars['stockResponse']['results'][number]) => {
     return Object.keys(branches).find(branch => {
       if(branches[branch]?.dealerId === item?.dealer?.id) {
@@ -67,6 +37,18 @@ const CarListCard = ({ stockResponse }: TCarListCard) => {
       }
     })
   }, [branches])
+
+  const loadMore = React.useCallback(() => {
+    setLoadMoreLoading(true)
+    ofetch(
+        `/api/cars?${new URLSearchParams(router.query as any).toString()}`
+    ).then((response: TCars["stockResponse"]) => {
+      setResults((p) => [...p, ...response.results]);
+      setHasMoreResults(response.hasMoreResults);
+    }).finally(() => {
+      setLoadMoreLoading(false)
+    });
+  }, [router.query])
 
   return (
     <div className="flex flex-col space-y-5">
@@ -153,15 +135,16 @@ const CarListCard = ({ stockResponse }: TCarListCard) => {
         </Link>
       ))}
       {hasMoreResults && results.length && (
-        <div ref={nextRef} className="flex justify-center w-full">
+        <div className="flex justify-center w-full">
           <div>
             <button
               type="submit"
               className="w-full bg-primary text-white py-3 px-6 rounded relative flex items-center justify-center"
+              onClick={loadMore}
             >
               <span className="relative flex items-center font-bold">
-                <FaSpinner className="animate-spin mr-2" />
-                <span className="font-bold">Load More . . .</span>
+                {loadMoreLoading &&<FaSpinner className="animate-spin mr-2" />}
+                <span>Load More</span>
               </span>
             </button>
           </div>

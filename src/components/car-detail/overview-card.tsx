@@ -12,7 +12,7 @@ const DetailComponent: React.FC<DetailComponentProps> = ({
   title,
 }) => {
   return (
-    <section className="flex gap-4 w-[195px]">
+    <section className="flex gap-4">
       <div className="bg-white w-12 h-12 p-2 flex justify-center items-center">
         {icon}
       </div>

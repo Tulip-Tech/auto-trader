@@ -8,7 +8,7 @@ import { FaPen } from 'react-icons/fa';
 const PartExchangeComponent = () => {
   return (
     <>
-      <div className="flex flex-col -mt-10">
+      <div className="flex flex-col">
         <div className="grid md:grid-cols-12 gap-5 mt-2">
           <div className="md:col-span-9">
             <h2 className="text-slate text-3xl font-bold my-6">

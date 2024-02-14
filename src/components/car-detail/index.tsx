@@ -22,7 +22,7 @@ const CarDetailsComponent: React.FC<CarDetailsComponentProps> = ({ car }) => {
   return (
     <div>
       <div className="sm:grid grid-cols-12 gap-8">
-        <div className="col-span-8">
+        <div className="col-span-7">
           <ImageSlider images={car.imageList?.images.map((item) => item.url)} />
           <div className="block sm:hidden mt-10">
             <p className="text-3xl font-semibold">{car.heading.title}</p>
@@ -50,7 +50,7 @@ const CarDetailsComponent: React.FC<CarDetailsComponentProps> = ({ car }) => {
             <span className="text-3xl font-bold">Overview</span>
             <span className="text-xl">{car.attentionGrabber}</span>
             <section className="flex flex-col">
-              <div className="flex flex-wrap gap-5 text-sm text-gray-700">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 text-sm text-gray-700">
                 {car.mileage && (
                   <DetailComponent
                     detail={`${
@@ -167,7 +167,7 @@ const CarDetailsComponent: React.FC<CarDetailsComponentProps> = ({ car }) => {
             </section>
           </section>
         </div>
-        <div className="col-span-4 mt-16 sm:mt-0">
+        <div className="col-span-5 mt-16 sm:mt-0">
           <div className="sm:block hidden">
             <p className="text-3xl font-semibold">{car.heading.title}</p>
             <p className="text-xl">{car.heading.subtitle}</p>
@@ -190,7 +190,7 @@ const CarDetailsComponent: React.FC<CarDetailsComponentProps> = ({ car }) => {
               {car.priceCurrency + car.price}
             </p>
           </div>
-          <div className="flex flex-wrap gap-5 mx-auto place-content-center my-10">
+          <div className="flex flex-wrap gap-5 my-10 w-full">
             <UnifiedInfoComponent />
           </div>
           <GoogleReviewsComponent />

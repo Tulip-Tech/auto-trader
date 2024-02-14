@@ -12,7 +12,8 @@ const GoogleReviewsComponent: React.FC = () => {
 
     const getReviews = React.useCallback(() => {
         const slug = router.query.slug as string
-        return (slug ? googleReviews[slug as keyof typeof googleReviews]?.reviews : Object.values(googleReviews).flatMap((k) => k?.reviews))?.filter(Boolean)
+        const reviews = (slug ? googleReviews[slug as keyof typeof googleReviews]?.reviews : Object.values(googleReviews).flatMap((k) => k?.reviews))?.filter(Boolean)
+        return reviews?.sort((a,b) => b.rating - a.rating)
     }, [router.query.slug]);
 
     const getAllReviewsLinkLrds = React.useCallback(() => {

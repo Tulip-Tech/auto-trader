@@ -33,7 +33,7 @@ const BnfDropdown = ({
         <div className="relative w-full">
           <select
             aria-label={fieldName}
-            className={`text-gray1 p-3 rounded w-full bg-lightgray ${
+            className={`text-darkgray p-3 rounded w-full bg-lightgray ${
               labelAlign === "top" ? "bg-slate-200" : "bg-white"
             } appearance-none pr-10`}
             value={defaultValue}

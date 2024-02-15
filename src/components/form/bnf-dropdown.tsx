@@ -1,4 +1,5 @@
 import React from "react";
+import { IoIosArrowDown } from "react-icons/io";
 
 interface DropdownOption {
     key: string;
@@ -21,28 +22,37 @@ const BnfDropdown = ({
                          labelAlign,
                      }: DropdownFieldProps) => {
     return (
-        <section
-            className={`flex justify-center gap-2 ${labelAlign === "top" ? "flex-col" : "flex-row"}`}
-        >
-            <label className="font-semibold my-auto" htmlFor={fieldName}>{fieldName}</label>
-            <select
-                aria-label={fieldName}
-                className={` text-gray-500 p-2 rounded w-full ${
-                    labelAlign === "top" ? "bg-slate-200" : " bg-white"
-                }`}
-                value={defaultValue}
-                onChange={e => {
-                    e.preventDefault();
-                    onChange(e.target.value)
-                }}
-            >
-                {options.map((option, index) => (
-                    <option key={index} value={option.value}>
-                        {option.key}
-                    </option>
-                ))}
-            </select>
-        </section>
+      <section
+        className={`flex justify-center gap-2 ${
+          labelAlign === "top" ? "flex-col" : "flex-row"
+        } relative`}
+      >
+        <label className="font-semibold my-auto" htmlFor={fieldName}>
+          {fieldName}
+        </label>
+        <div className="relative w-full">
+          <select
+            aria-label={fieldName}
+            className={`text-gray1 p-3 rounded w-full bg-lightgray ${
+              labelAlign === "top" ? "bg-slate-200" : "bg-white"
+            } appearance-none pr-10`}
+            value={defaultValue}
+            onChange={(e) => {
+              e.preventDefault();
+              onChange(e.target.value);
+            }}
+          >
+            {options.map((option, index) => (
+              <option key={index} value={option.value}>
+                {option.key}
+              </option>
+            ))}
+          </select>
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4 text-gray1">
+            <IoIosArrowDown />
+          </div>
+        </div>
+      </section>
     );
 };
 

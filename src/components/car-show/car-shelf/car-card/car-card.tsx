@@ -70,7 +70,7 @@ const CarListCard = ({ stockResponse }: TCarListCard) => {
                   <Image
                     priority
                     src={item.images?.[0]?.src}
-                    alt={item.images?.[0]?.src || 'car-logo'}
+                    alt={item.images?.[0]?.src || "car-logo"}
                     height={182}
                     width={198}
                     className="rounded-md w-full"
@@ -129,7 +129,14 @@ const CarListCard = ({ stockResponse }: TCarListCard) => {
                 {item.price}
                 <RatingLabel rating={item.priceIndicator.rating} />
               </div>
-              <Image src={item?.dealerLogo} width={80} height={60} alt="bnf" />
+              <div className="flex items-center">
+                <Image
+                  src={item?.dealerLogo}
+                  width={80}
+                  height={60}
+                  alt="bnf"
+                />
+              </div>
             </div>
           </div>
         </Link>
@@ -143,7 +150,7 @@ const CarListCard = ({ stockResponse }: TCarListCard) => {
               onClick={loadMore}
             >
               <span className="relative flex items-center font-bold">
-                {loadMoreLoading &&<FaSpinner className="animate-spin mr-2" />}
+                {loadMoreLoading && <FaSpinner className="animate-spin mr-2" />}
                 <span>Load More</span>
               </span>
             </button>

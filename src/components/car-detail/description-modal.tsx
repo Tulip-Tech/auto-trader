@@ -1,11 +1,11 @@
-import React, { ReactNode, useEffect, useRef } from "react";
-import CategoryDropdowns from "./dropdowns/category-dropdown";
 import { TechData } from "@/interface/techData";
+import React, { ReactNode, useEffect, useRef } from "react";
+import { MdClose } from "react-icons/md"; 
 
 interface ModalProps {
   title: string;
-  techData?: TechData;
   isOpen: boolean;
+  techData?: TechData;
   onClose: () => void;
   children?: ReactNode;
 }
@@ -35,7 +35,6 @@ const ModalFromRight: React.FC<ModalProps> = ({
     };
   }, [onClose]);
 
-  // Adjust the transform property based on the isOpen state to animate the modal
   const modalTransformClass = isOpen ? "translate-x-0" : "translate-x-full";
 
   return (
@@ -48,22 +47,17 @@ const ModalFromRight: React.FC<ModalProps> = ({
         ref={modalRef}
         className={`flex flex-col space-y-5 fixed top-0 right-0 pt-20 w-[600px] h-full bg-white shadow-lg p-4 overflow-auto transition-transform transform ${modalTransformClass} ease-out duration-500`}
       >
-        {/* <button className="text-black close-button" onClick={onClose}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button> */}
+        <button
+          onClick={(event) => {
+            event.stopPropagation();
+            onClose();
+          }}
+          className="ml-auto mb-5 pointer"
+          aria-label="Close"
+        >
+          <MdClose size={24} />
+        </button>
+
         <h2 className="text-lg font-semibold mb-5 w-full text-center">
           {title}
         </h2>

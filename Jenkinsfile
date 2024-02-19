@@ -26,11 +26,23 @@ pipeline {
         }
         stage('Deploy to develop') {
             when {
-                branch 'master'
+                branch 'develop'
             }
             steps {
                 script {
                     def servers = ['10.217.125.7']
+                    def branch = 'develop'
+                    deploy_old(servers, branch)
+                }
+            }
+        }
+        stage('Deploy to prod') {
+            when {
+                branch 'master'
+            }
+            steps {
+                script {
+                    def servers = ['10.10.100.180']
                     def branch = 'master'
                     deploy_old(servers, branch)
                 }

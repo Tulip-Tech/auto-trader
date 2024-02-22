@@ -5,7 +5,7 @@ import GoogleReviewsComponent from "../car-show/google-review";
 import { CiCalendar } from "react-icons/ci";
 import { FiUser } from "react-icons/fi";
 import { GiGearStickPattern, GiCarDoor } from "react-icons/gi";
-import { IoMdSpeedometer } from "react-icons/io";
+import { IoMdHome, IoMdSpeedometer } from "react-icons/io";
 import { IoCarOutline, IoDocumentTextOutline } from "react-icons/io5";
 import { PiGasPump, PiEngine } from "react-icons/pi";
 import DetailComponent from "./overview-card";
@@ -13,15 +13,64 @@ import UnifiedInfoComponent from "../car-show/unified-info";
 import FeaturesAndSpec from "./description-tabs/features and spec";
 import RunningCostTab from "./description-tabs/running-costs";
 import type { TSingleCar } from "@/services/cars";
+import Link from "next/link";
+import { FaChevronRight } from "react-icons/fa";
+import { useRouter } from "next/router";
 
 interface CarDetailsComponentProps {
   car: TSingleCar;
 }
 
 const CarDetailsComponent: React.FC<CarDetailsComponentProps> = ({ car }) => {
+  const router = useRouter();
+
+  const pathSegments = router.asPath.split('?')[0].split('/').filter(v => v.length > 0);
+
+  const breadcrumbs = pathSegments.map((segment, index) => {
+    const href = "/" + pathSegments.slice(0, index + 1).join("/");
+    const name = segment.charAt(0).toUpperCase() + segment.slice(1);
+    return { name, href };
+  });
   return (
-    <div>
-      <div className="sm:grid grid-cols-12 gap-8">
+    <>
+      <nav aria-label="Breadcrumb" className="mt-20">
+        <ol className="flex items-center gap-1 text-sm text-gray-600">
+          <li>
+            <Link href="/" passHref className="flex gap-1 items-center">
+              <IoMdHome />
+              <p className="block transition hover:text-gray-700 text-xs sm:text-base">
+                Home
+              </p>
+            </Link>
+          </li>
+
+          {breadcrumbs.map((crumb, index) => (
+            <React.Fragment key={index}>
+              {crumb.name !== "Car-details" && (
+                <>
+                  <li>
+                    <FaChevronRight />
+                  </li>
+                  <li>
+                    {index + 1 === breadcrumbs.length ? (
+                      <span className="text-gray-500 font-semibold text-xs sm:text-base">
+                        {car.heading.title}
+                      </span>
+                    ) : (
+                      <Link href={crumb.href} passHref>
+                        <p className="block transition hover:text-gray-700 text-xs sm:text-base">
+                          {crumb.name}
+                        </p>
+                      </Link>
+                    )}
+                  </li>
+                </>
+              )}
+            </React.Fragment>
+          ))}
+        </ol>
+      </nav>
+      <div className="sm:grid grid-cols-12 gap-8 mt-6">
         <div className="col-span-7">
           <ImageSlider images={car.imageList?.images.map((item) => item.url)} />
           <div className="block sm:hidden mt-10">
@@ -196,7 +245,7 @@ const CarDetailsComponent: React.FC<CarDetailsComponentProps> = ({ car }) => {
           <GoogleReviewsComponent />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -34,7 +34,7 @@ const CarShowComponent: React.FC<CarShowComponentProps> = ({ cars }) => {
                     </div>
                 </div>
                 <div className="md:col-span-6 space-y-2">
-                    <div className="flex justify-end -mt-3 mb-6">
+                    <div className="flex justify-end -mt-3 mb-3">
                         <FilterFormSort options={cars.sortOptions}/>
                     </div>
                     <CarListCard stockResponse={cars}/>

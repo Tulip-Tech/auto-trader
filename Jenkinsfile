@@ -10,6 +10,15 @@ def deploy_old(servers, branch = '') {
     }
 }
 
+def deploy_prod(servers, branch = '') {
+    for (item in servers) {
+        println "Deploying to ${item}."
+        sh(script: """
+            whoami
+            ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null bnf-prod-admin-acct@${item} bash -c "'./cars.sh'"
+        """)
+    }
+}
 pipeline {
     agent {
         node {

@@ -42,7 +42,7 @@ pipeline {
             }
             steps {
                 script {
-                    def servers = ['10.10.100.180']
+                    def servers = ['20.117.209.112']
                     def branch = 'master'
                     deploy_old(servers, branch)
                 }

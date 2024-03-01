@@ -53,7 +53,7 @@ pipeline {
                 script {
                     def servers = ['20.117.209.112']
                     def branch = 'master'
-                    deploy_old(servers, branch)
+                    deploy_prod(servers, branch)
                 }
             }
         }

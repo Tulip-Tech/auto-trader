@@ -19,6 +19,8 @@ const ContactInfoComponent: React.FC<ContactInfoProps> = ({
   email,
   address,
 }) => {
+  const encodedAddress = encodeURIComponent(address);
+
   return (
     <div className="w-full overflow-hidden shadow-lg bg-white mb-4 rounded-lg">
       <div className="">
@@ -28,19 +30,27 @@ const ContactInfoComponent: React.FC<ContactInfoProps> = ({
         <div className="px-6 py-4 space-y-4">
           <div className="text-slate flex items-center gap-2">
             <FaPhoneAlt size={16} />
-            <p className="text-sm">{phone}</p>
+            <a href={`tel:${phone}`} className="text-sm">
+              {phone}
+            </a>
           </div>
           <div className="text-slate flex items-center gap-2">
             <BiMobile size={16} />
-            <p className="text-sm">{mobile}</p>
+            <a href={`tel:${mobile}`} className="text-sm">
+              {mobile}
+            </a>
           </div>
           <div className="text-slate flex items-center gap-2">
             <CiMail size={16} />
-            <p className="text-sm break-all">{email}</p>
+            <a href={`mailto:${email}`} className="text-sm break-all">
+              {email}
+            </a>
           </div>
           <div className="text-slate flex items-center gap-2">
             <GrLocation size={16} />
-            <p className="text-sm">{address}</p>
+            <a href={`https://www.google.com/maps/search/?api=1&query=${encodedAddress}`} target="_blank" rel="noopener noreferrer" className="text-sm">
+              <address className="not-italic">{address}</address>
+            </a>
           </div>
         </div>
       </div>
